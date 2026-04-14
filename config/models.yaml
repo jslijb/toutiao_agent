@@ -137,7 +137,7 @@ publisher:
   # 默认文章分类（职场/科技/财经/教育/生活等）
   default_category: "职场"
   # 默认发布位置（留空则不添加位置）
-  default_location: "龙华区"
+  default_location: "xxx"
 
 # ============================================
 # 文章去重配置
