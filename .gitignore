@@ -1,0 +1,10 @@
+# 忽略 data 目录及其所有内容
+data/
+# 忽略 log 目录及其所有内容
+log/
+# 忽略 output 目录及其所有内容
+output/
+# 忽略 publisher/data 目录及其所有内容
+publisher/data/
+# 忽略 toutiao 目录及其所有内容
+toutiao/

@@ -1,0 +1,457 @@
+2026-04-14 00:07:18 | INFO     | webui.app:main:73 - [启动] 开始初始化...
+2026-04-14 00:07:18 | INFO     | webui.app:main:105 - [启动] 配置参数: port=7860, host=127.0.0.1, share=False
+2026-04-14 00:07:18 | INFO     | webui.app:main:108 - [启动] 正在创建 Gradio 应用...
+2026-04-14 00:07:18 | INFO     | webui.app:create_app:20 - [应用创建] 开始创建 Gradio 应用...
+2026-04-14 00:07:18 | INFO     | webui.app:create_app:27 - [应用创建] 配置读取耗时: 0.000秒
+2026-04-14 00:07:20 | INFO     | webui.app:create_app:57 - [应用创建] 应用创建完成，总耗时: 2.419秒
+2026-04-14 00:07:20 | INFO     | webui.app:main:111 - [启动] 应用创建完成，耗时: 2.42秒
+2026-04-14 00:07:20 | INFO     | webui.app:main:112 - [启动] 启动 Gradio Web UI... (http://127.0.0.1:7860)
+2026-04-14 00:07:31 | INFO     | models.generated_store:_load:46 - [GeneratedStore] 加载 4 篇生成文章
+2026-04-14 00:07:42 | INFO     | publisher.toutiao_publisher:_go_to_micro_publish:324 - [Publisher] 进入微头条发布页
+2026-04-14 00:07:42 | INFO     | publisher.toutiao_publisher:_close_assistant_drawer:343 - [Publisher] 检测到发布助手遮罩层，按 ESC 关闭...
+2026-04-14 00:07:42 | INFO     | publisher.toutiao_publisher:_close_assistant_drawer:346 - [Publisher] 已关闭发布助手弹窗
+2026-04-14 00:07:42 | INFO     | publisher.toutiao_publisher:_build_micro_content:567 - [Publisher] 内容组装完成: 1460字正文 + 4个话题
+2026-04-14 00:08:12 | ERROR    | publisher.toutiao_publisher:_type_content_keyboard:392 - [Publisher] 内容输入失败: ElementHandle.click: Timeout 30000ms exceeded.
+Call log:
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="byte-drawer-mask fade-appear-done fade-enter-done"></div> from <div class="byte-drawer-wrapper publish-assistant-old-drawer">…</div> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="byte-drawer-mask fade-appear-done fade-enter-done"></div> from <div class="byte-drawer-wrapper publish-assistant-old-drawer">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    55 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div class="byte-drawer-mask fade-appear-done fade-enter-done"></div> from <div class="byte-drawer-wrapper publish-assistant-old-drawer">…</div> subtree intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+2026-04-14 00:08:13 | ERROR    | publisher.toutiao_publisher:_fill_content:366 - [Publisher] 填写内容失败: ElementHandle.click: Timeout 30000ms exceeded.
+Call log:
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="byte-drawer-mask fade-appear-done fade-enter-done"></div> from <div class="byte-drawer-wrapper publish-assistant-old-drawer">…</div> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="byte-drawer-mask fade-appear-done fade-enter-done"></div> from <div class="byte-drawer-wrapper publish-assistant-old-drawer">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    55 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div class="byte-drawer-mask fade-appear-done fade-enter-done"></div> from <div class="byte-drawer-wrapper publish-assistant-old-drawer">…</div> subtree intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+2026-04-14 00:08:13 | ERROR    | publisher.toutiao_publisher:publish_micro_toutiao:311 - [Publisher] 发布失败：ElementHandle.click: Timeout 30000ms exceeded.
+Call log:
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="byte-drawer-mask fade-appear-done fade-enter-done"></div> from <div class="byte-drawer-wrapper publish-assistant-old-drawer">…</div> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="byte-drawer-mask fade-appear-done fade-enter-done"></div> from <div class="byte-drawer-wrapper publish-assistant-old-drawer">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    55 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div class="byte-drawer-mask fade-appear-done fade-enter-done"></div> from <div class="byte-drawer-wrapper publish-assistant-old-drawer">…</div> subtree intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+2026-04-14 09:28:40 | INFO     | webui.app:main:73 - [启动] 开始初始化...
+2026-04-14 09:28:40 | INFO     | webui.app:main:105 - [启动] 配置参数: port=7860, host=127.0.0.1, share=False
+2026-04-14 09:28:40 | INFO     | webui.app:main:108 - [启动] 正在创建 Gradio 应用...
+2026-04-14 09:28:40 | INFO     | webui.app:create_app:20 - [应用创建] 开始创建 Gradio 应用...
+2026-04-14 09:28:40 | INFO     | webui.app:create_app:27 - [应用创建] 配置读取耗时: 0.001秒
+2026-04-14 09:28:42 | INFO     | webui.app:create_app:57 - [应用创建] 应用创建完成，总耗时: 2.363秒
+2026-04-14 09:28:42 | INFO     | webui.app:main:111 - [启动] 应用创建完成，耗时: 2.37秒
+2026-04-14 09:28:42 | INFO     | webui.app:main:112 - [启动] 启动 Gradio Web UI... (http://127.0.0.1:7860)
+2026-04-14 09:28:52 | INFO     | publisher.toutiao_publisher:verify_login:120 - [Publisher] Cookie 加载结果：True
+2026-04-14 09:28:52 | INFO     | publisher.toutiao_publisher:verify_login:122 - [Publisher] 加载了 40 个 cookies
+2026-04-14 09:28:52 | INFO     | publisher.toutiao_publisher:verify_login:125 - [Publisher] Cookie 域名：{'.so.toutiao.com', 'www.toutiao.com', '.www.toutiao.com', 'xxbg.snssdk.com', 'so.toutiao.com', '.toutiao.com'}
+2026-04-14 09:29:02 | INFO     | publisher.toutiao_publisher:verify_login:143 - [Publisher] 当前 URL: https://mp.toutiao.com/profile_v4/index
+2026-04-14 09:29:02 | INFO     | publisher.toutiao_publisher:verify_login:159 - [Publisher] 找到发布按钮：a:has-text("发布")
+2026-04-14 09:29:02 | INFO     | publisher.toutiao_publisher:verify_login:160 - [Publisher] 验证结果：成功
+2026-04-14 09:29:42 | INFO     | models.generated_store:_load:46 - [GeneratedStore] 加载 4 篇生成文章
+2026-04-14 09:29:59 | INFO     | publisher.toutiao_publisher:_go_to_micro_publish:324 - [Publisher] 进入微头条发布页
+2026-04-14 09:29:59 | INFO     | publisher.toutiao_publisher:_close_assistant_drawer:343 - [Publisher] 检测到发布助手遮罩层，按 ESC 关闭...
+2026-04-14 09:29:59 | INFO     | publisher.toutiao_publisher:_close_assistant_drawer:346 - [Publisher] 已关闭发布助手弹窗
+2026-04-14 09:29:59 | INFO     | publisher.toutiao_publisher:_build_micro_content:651 - [Publisher] 内容组装完成: 1460字正文 + 4个话题
+2026-04-14 09:30:00 | INFO     | publisher.toutiao_publisher:_force_close_all_popups:472 - [Publisher] 尝试关闭弹窗方法 1
+2026-04-14 09:30:00 | INFO     | publisher.toutiao_publisher:_force_close_all_popups:472 - [Publisher] 尝试关闭弹窗方法 2
+2026-04-14 09:31:00 | INFO     | publisher.toutiao_publisher:_type_content_keyboard:389 - [Publisher] 找到编辑器：div.ProseMirror[contenteditable="true"]
+2026-04-14 09:31:12 | INFO     | publisher.toutiao_publisher:_type_content_keyboard:441 - [Publisher] 通过键盘输入内容完成
+2026-04-14 09:31:12 | INFO     | publisher.toutiao_publisher:_upload_images:501 - [Publisher] 开始粘贴上传 4 张配图...
+2026-04-14 09:31:12 | INFO     | publisher.toutiao_publisher:_upload_images:523 - [Publisher] 上传前编辑器已有 0 张图片
+2026-04-14 09:31:12 | INFO     | publisher.toutiao_publisher:_upload_images:527 - [Publisher] 配图 1/4: 15f9d0b1_0.png
+2026-04-14 09:31:13 | INFO     | publisher.toutiao_publisher:_upload_images:579 - [Publisher] ✅ 配图 1/4 粘贴成功
+2026-04-14 09:31:13 | INFO     | publisher.toutiao_publisher:_upload_images:527 - [Publisher] 配图 2/4: 4e7ba777_0.png
+2026-04-14 09:31:13 | INFO     | publisher.toutiao_publisher:_upload_images:579 - [Publisher] ✅ 配图 2/4 粘贴成功
+2026-04-14 09:31:13 | INFO     | publisher.toutiao_publisher:_upload_images:527 - [Publisher] 配图 3/4: 806fe5e5_0.png
+2026-04-14 09:31:13 | INFO     | publisher.toutiao_publisher:_upload_images:579 - [Publisher] ✅ 配图 3/4 粘贴成功
+2026-04-14 09:31:13 | INFO     | publisher.toutiao_publisher:_upload_images:527 - [Publisher] 配图 4/4: 059db848_0.png
+2026-04-14 09:31:13 | INFO     | publisher.toutiao_publisher:_upload_images:579 - [Publisher] ✅ 配图 4/4 粘贴成功
+2026-04-14 09:31:13 | INFO     | publisher.toutiao_publisher:_upload_images:586 - [Publisher] 配图上传完成: 4/4 张成功
+2026-04-14 09:31:13 | ERROR    | publisher.toutiao_publisher:_add_location:674 - [Publisher] ❌ 未找到位置文本框，代码逻辑有问题
+2026-04-14 09:31:13 | ERROR    | publisher.toutiao_publisher:_add_location:680 - [Publisher] 添加位置失败: 未找到位置文本框
+2026-04-14 09:31:14 | ERROR    | publisher.toutiao_publisher:publish_micro_toutiao:311 - [Publisher] 发布失败：未找到位置文本框
+2026-04-14 09:48:38 | INFO     | webui.app:main:73 - [启动] 开始初始化...
+2026-04-14 09:48:38 | INFO     | webui.app:main:105 - [启动] 配置参数: port=7860, host=127.0.0.1, share=False
+2026-04-14 09:48:38 | INFO     | webui.app:main:108 - [启动] 正在创建 Gradio 应用...
+2026-04-14 09:48:38 | INFO     | webui.app:create_app:20 - [应用创建] 开始创建 Gradio 应用...
+2026-04-14 09:48:38 | INFO     | webui.app:create_app:27 - [应用创建] 配置读取耗时: 0.000秒
+2026-04-14 09:48:40 | INFO     | webui.app:create_app:57 - [应用创建] 应用创建完成，总耗时: 2.696秒
+2026-04-14 09:48:40 | INFO     | webui.app:main:111 - [启动] 应用创建完成，耗时: 2.70秒
+2026-04-14 09:48:40 | INFO     | webui.app:main:112 - [启动] 启动 Gradio Web UI... (http://127.0.0.1:7860)
+2026-04-14 09:48:48 | INFO     | models.generated_store:_load:46 - [GeneratedStore] 加载 4 篇生成文章
+2026-04-14 09:48:58 | ERROR    | publisher.toutiao_publisher:publish_micro_toutiao:283 - [Publisher] 未登录，请先登录
+2026-04-14 09:49:15 | INFO     | publisher.toutiao_publisher:verify_login:120 - [Publisher] Cookie 加载结果：True
+2026-04-14 09:49:15 | INFO     | publisher.toutiao_publisher:verify_login:122 - [Publisher] 加载了 40 个 cookies
+2026-04-14 09:49:15 | INFO     | publisher.toutiao_publisher:verify_login:125 - [Publisher] Cookie 域名：{'.toutiao.com', '.so.toutiao.com', '.www.toutiao.com', 'so.toutiao.com', 'xxbg.snssdk.com', 'www.toutiao.com'}
+2026-04-14 09:49:41 | INFO     | publisher.toutiao_publisher:verify_login:143 - [Publisher] 当前 URL: https://mp.toutiao.com/profile_v4/
+2026-04-14 09:49:41 | WARNING  | publisher.toutiao_publisher:verify_login:165 - [Publisher] 未找到发布按钮，可能未登录或页面结构变化
+2026-04-14 09:49:41 | INFO     | publisher.toutiao_publisher:verify_login:166 - [Publisher] 验证结果：失败
+2026-04-14 09:49:59 | INFO     | publisher.toutiao_publisher:login:60 - [Publisher] 请扫描二维码登录...
+2026-04-14 09:50:21 | INFO     | publisher.toutiao_publisher:login:67 - [Publisher] 登录成功
+2026-04-14 09:50:21 | INFO     | publisher.toutiao_publisher:login:70 - [Publisher] 获取到 31 个 cookies
+2026-04-14 09:50:21 | INFO     | publisher.toutiao_publisher:login:76 - [Publisher] Cookie 域名分布：{'mp.toutiao.com': 7, '.toutiao.com': 24}
+2026-04-14 09:50:21 | INFO     | utils.cookie_manager:save_cookies:34 - Cookie 已保存: toutiao -> D:\Python\bigmodel\coze\data\cookies\toutiao_cookies.json
+2026-04-14 09:50:21 | INFO     | publisher.toutiao_publisher:login:78 - [Publisher] Cookie 已保存到：D:\Python\bigmodel\coze\data\cookies
+2026-04-14 09:50:36 | INFO     | publisher.toutiao_publisher:_go_to_micro_publish:324 - [Publisher] 进入微头条发布页
+2026-04-14 09:50:36 | INFO     | publisher.toutiao_publisher:_close_assistant_drawer:343 - [Publisher] 检测到发布助手遮罩层，按 ESC 关闭...
+2026-04-14 09:50:36 | INFO     | publisher.toutiao_publisher:_close_assistant_drawer:346 - [Publisher] 已关闭发布助手弹窗
+2026-04-14 09:50:36 | INFO     | publisher.toutiao_publisher:_build_micro_content:638 - [Publisher] 内容组装完成: 1460字正文 + 4个话题
+2026-04-14 09:50:37 | INFO     | publisher.toutiao_publisher:_force_close_all_popups:459 - [Publisher] 尝试关闭弹窗方法 1
+2026-04-14 09:50:37 | INFO     | publisher.toutiao_publisher:_force_close_all_popups:459 - [Publisher] 尝试关闭弹窗方法 2
+2026-04-14 09:51:37 | INFO     | publisher.toutiao_publisher:_type_content_keyboard:383 - [Publisher] 找到编辑器：ProseMirror
+2026-04-14 09:51:49 | INFO     | publisher.toutiao_publisher:_type_content_keyboard:428 - [Publisher] 通过键盘输入内容完成
+2026-04-14 09:51:49 | INFO     | publisher.toutiao_publisher:_upload_images:488 - [Publisher] 开始粘贴上传 4 张配图...
+2026-04-14 09:51:50 | INFO     | publisher.toutiao_publisher:_upload_images:510 - [Publisher] 上传前编辑器已有 0 张图片
+2026-04-14 09:51:50 | INFO     | publisher.toutiao_publisher:_upload_images:514 - [Publisher] 配图 1/4: 15f9d0b1_0.png
+2026-04-14 09:51:50 | INFO     | publisher.toutiao_publisher:_upload_images:566 - [Publisher] ✅ 配图 1/4 粘贴成功
+2026-04-14 09:51:50 | INFO     | publisher.toutiao_publisher:_upload_images:514 - [Publisher] 配图 2/4: 4e7ba777_0.png
+2026-04-14 09:51:50 | INFO     | publisher.toutiao_publisher:_upload_images:566 - [Publisher] ✅ 配图 2/4 粘贴成功
+2026-04-14 09:51:50 | INFO     | publisher.toutiao_publisher:_upload_images:514 - [Publisher] 配图 3/4: 806fe5e5_0.png
+2026-04-14 09:51:50 | INFO     | publisher.toutiao_publisher:_upload_images:566 - [Publisher] ✅ 配图 3/4 粘贴成功
+2026-04-14 09:51:50 | INFO     | publisher.toutiao_publisher:_upload_images:514 - [Publisher] 配图 4/4: 059db848_0.png
+2026-04-14 09:51:50 | INFO     | publisher.toutiao_publisher:_upload_images:566 - [Publisher] ✅ 配图 4/4 粘贴成功
+2026-04-14 09:51:50 | INFO     | publisher.toutiao_publisher:_upload_images:573 - [Publisher] 配图上传完成: 4/4 张成功
+2026-04-14 09:51:50 | INFO     | publisher.toutiao_publisher:_add_location:647 - [Publisher] 开始添加位置: 龙华区
+2026-04-14 09:51:50 | ERROR    | publisher.toutiao_publisher:_add_location:679 - [Publisher] ❌ 未找到位置文本框，代码逻辑有问题
+2026-04-14 09:51:50 | INFO     | publisher.toutiao_publisher:_add_location:683 - [Publisher] 已保存截图: D:\Python\bigmodel\coze\publisher\data\publisher\no_location_input.png
+2026-04-14 09:51:50 | ERROR    | publisher.toutiao_publisher:_add_location:709 - [Publisher] 添加位置失败: 'list' object has no attribute 'length'
+2026-04-14 09:51:50 | INFO     | publisher.toutiao_publisher:_add_location:713 - [Publisher] 已保存错误截图: D:\Python\bigmodel\coze\publisher\data\publisher\location_error.png
+2026-04-14 09:51:51 | WARNING  | publisher.toutiao_publisher:_add_location:719 - [Publisher] 位置添加失败，但继续执行发布流程
+2026-04-14 09:51:51 | ERROR    | publisher.toutiao_publisher:_add_ai_declaration:740 - [Publisher] ❌ 未找到作者声明选择框，代码逻辑有问题
+2026-04-14 09:51:51 | ERROR    | publisher.toutiao_publisher:_add_ai_declaration:746 - [Publisher] 添加作者声明失败: 未找到作者声明选择框
+2026-04-14 09:51:51 | ERROR    | publisher.toutiao_publisher:publish_micro_toutiao:311 - [Publisher] 发布失败：未找到作者声明选择框
+2026-04-14 10:19:39 | INFO     | webui.app:main:73 - [启动] 开始初始化...
+2026-04-14 10:19:39 | INFO     | webui.app:main:105 - [启动] 配置参数: port=7860, host=127.0.0.1, share=False
+2026-04-14 10:19:39 | INFO     | webui.app:main:108 - [启动] 正在创建 Gradio 应用...
+2026-04-14 10:19:39 | INFO     | webui.app:create_app:20 - [应用创建] 开始创建 Gradio 应用...
+2026-04-14 10:19:39 | INFO     | webui.app:create_app:27 - [应用创建] 配置读取耗时: 0.000秒
+2026-04-14 10:19:41 | INFO     | webui.app:create_app:57 - [应用创建] 应用创建完成，总耗时: 2.154秒
+2026-04-14 10:19:41 | INFO     | webui.app:main:111 - [启动] 应用创建完成，耗时: 2.16秒
+2026-04-14 10:19:41 | INFO     | webui.app:main:112 - [启动] 启动 Gradio Web UI... (http://127.0.0.1:7860)
+2026-04-14 10:19:50 | INFO     | publisher.toutiao_publisher:verify_login:252 - [Publisher] 加载了 31 个 cookies
+2026-04-14 10:20:01 | INFO     | publisher.toutiao_publisher:verify_login:263 - [Publisher] 当前 URL: https://mp.toutiao.com/profile_v4/index
+2026-04-14 10:20:13 | INFO     | models.generated_store:_load:46 - [GeneratedStore] 加载 4 篇生成文章
+2026-04-14 10:20:16 | INFO     | publisher.toutiao_publisher:_load_cookies_to_page:378 - [Publisher] 加载了 31 个已保存的 Cookie
+2026-04-14 10:20:23 | INFO     | publisher.toutiao_publisher:_close_assistant_drawer:391 - [Publisher] 检测到发布助手遮罩层，按 ESC 关闭...
+2026-04-14 10:20:24 | INFO     | publisher.toutiao_publisher:_close_assistant_drawer:391 - [Publisher] 检测到发布助手遮罩层，按 ESC 关闭...
+2026-04-14 10:20:24 | INFO     | publisher.toutiao_publisher:_close_assistant_drawer:391 - [Publisher] 检测到发布助手遮罩层，按 ESC 关闭...
+2026-04-14 10:20:25 | INFO     | publisher.toutiao_publisher:_build_micro_content:562 - [Publisher] 内容组装完成: 1460字正文 + 4个话题
+2026-04-14 10:20:25 | INFO     | publisher.toutiao_publisher:_type_content:427 - [Publisher] 找到编辑器：div.syl-editor div.ProseMirror
+2026-04-14 10:20:25 | INFO     | publisher.toutiao_publisher:_type_content:441 - [Publisher] 通过 JS insertHTML 输入内容成功
+2026-04-14 10:20:25 | INFO     | publisher.toutiao_publisher:_upload_images:478 - [Publisher] 开始粘贴上传 4 张配图...
+2026-04-14 10:20:55 | ERROR    | publisher.toutiao_publisher:publish_micro_toutiao:370 - [Publisher] 发布失败：ElementHandle.click: Timeout 30000ms exceeded.
+Call log:
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="byte-drawer-mask fade-appear-done fade-enter-done"></div> from <div class="byte-drawer-wrapper publish-assistant-old-drawer">…</div> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="byte-drawer-mask fade-appear-done fade-enter-done"></div> from <div class="byte-drawer-wrapper publish-assistant-old-drawer">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    54 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div class="byte-drawer-mask fade-appear-done fade-enter-done"></div> from <div class="byte-drawer-wrapper publish-assistant-old-drawer">…</div> subtree intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+2026-04-14 10:28:34 | INFO     | publisher.toutiao_publisher:login:165 - [Publisher] 加载了 31 个已保存的 Cookie
+2026-04-14 10:28:41 | INFO     | publisher.toutiao_publisher:login:176 - [Publisher] Cookie 有效，自动登录成功！
+2026-04-14 10:28:41 | INFO     | publisher.toutiao_publisher:_save_cookies:222 - [Publisher] 获取到 31 个 cookies
+2026-04-14 10:28:41 | INFO     | publisher.toutiao_publisher:_save_cookies:227 - [Publisher] Cookie 域名分布：{'mp.toutiao.com': 7, '.toutiao.com': 24}
+2026-04-14 10:28:41 | INFO     | utils.cookie_manager:save_cookies:34 - Cookie 已保存: toutiao -> D:\Python\bigmodel\coze\data\cookies\toutiao_cookies.json
+2026-04-14 10:28:41 | INFO     | publisher.toutiao_publisher:_save_cookies:229 - [Publisher] Cookie 已保存到：D:\Python\bigmodel\coze\data\cookies
+2026-04-14 10:29:50 | INFO     | publisher.toutiao_publisher:login:165 - [Publisher] 加载了 31 个已保存的 Cookie
+2026-04-14 10:29:56 | INFO     | publisher.toutiao_publisher:login:176 - [Publisher] Cookie 有效，自动登录成功！
+2026-04-14 10:29:56 | INFO     | publisher.toutiao_publisher:_save_cookies:222 - [Publisher] 获取到 31 个 cookies
+2026-04-14 10:29:56 | INFO     | publisher.toutiao_publisher:_save_cookies:227 - [Publisher] Cookie 域名分布：{'mp.toutiao.com': 7, '.toutiao.com': 24}
+2026-04-14 10:29:56 | INFO     | utils.cookie_manager:save_cookies:34 - Cookie 已保存: toutiao -> D:\Python\bigmodel\coze\data\cookies\toutiao_cookies.json
+2026-04-14 10:29:56 | INFO     | publisher.toutiao_publisher:_save_cookies:229 - [Publisher] Cookie 已保存到：D:\Python\bigmodel\coze\data\cookies
+2026-04-14 10:30:09 | WARNING  | publisher.toutiao_publisher:_close_assistant_drawer:406 - [Publisher] ESC 无法关闭发布助手弹窗，尝试强制移除遮罩层
+2026-04-14 10:30:09 | INFO     | publisher.toutiao_publisher:_close_assistant_drawer:421 - [Publisher] 强制处理结果: hidden_wrapper
+2026-04-14 10:30:11 | INFO     | publisher.toutiao_publisher:_build_micro_content:593 - [Publisher] 内容组装完成: 111字正文 + 5个话题
+2026-04-14 10:30:11 | INFO     | publisher.toutiao_publisher:_type_content:458 - [Publisher] 找到编辑器：div.syl-editor div.ProseMirror
+2026-04-14 10:30:11 | INFO     | publisher.toutiao_publisher:_type_content:472 - [Publisher] 通过 JS insertHTML 输入内容成功
+2026-04-14 10:30:13 | INFO     | publisher.toutiao_publisher:_add_location:600 - [Publisher] 开始添加位置: 龙华区
+2026-04-14 10:30:13 | ERROR    | publisher.toutiao_publisher:_diagnose_element_not_found:138 - [诊断] 页面 URL: https://mp.toutiao.com/profile_v4/weitoutiao/publish?from=toutiao_pc
+2026-04-14 10:30:13 | ERROR    | publisher.toutiao_publisher:_diagnose_element_not_found:139 - [诊断] 页面标题: 头条号
+2026-04-14 10:30:13 | ERROR    | publisher.toutiao_publisher:_diagnose_element_not_found:140 - [诊断] 页面上所有 checkbox: [{'tag': 'LABEL', 'class': 'byte-checkbox checkbot-item checkbox-with-tip disabled', 'text': '头条首发', 'value': '', 'type': ''}, {'tag': 'INPUT', 'class': '', 'text': '', 'value': '', 'type': 'checkbox'}, {'tag': 'LABEL', 'class': 'byte-checkbox checkbot-item', 'text': '取材网络', 'value': '', 'type': ''}, {'tag': 'INPUT', 'class': '', 'text': '', 'value': '4', 'type': 'checkbox'}, {'tag': 'LABEL', 'class': 'byte-checkbox checkbot-item', 'text': '引用站内', 'value': '', 'type': ''}, {'tag': 'INPUT', 'class': '', 'text': '', 'value': '1', 'type': 'checkbox'}, {'tag': 'LABEL', 'class': 'byte-checkbox checkbot-item', 'text': '个人观点，仅供参考', 'value': '', 'type': ''}, {'tag': 'INPUT', 'class': '', 'text': '', 'value': '5', 'type': 'checkbox'}, {'tag': 'LABEL', 'class': 'byte-checkbox checkbot-item checkbox-with-tip', 'text': '引用AI', 'value': '', 'type': ''}, {'tag': 'INPUT', 'class': '', 'text': '', 'value': '3', 'type': 'checkbox'}, {'tag': 'LABEL', 'class': 'byte-checkbox checkbot-item checkbox-with-tip', 'text': '虚构演绎，故事经历', 'value': '', 'type': ''}, {'tag': 'INPUT', 'class': '', 'text': '', 'value': '6', 'type': 'checkbox'}, {'tag': 'LABEL', 'class': 'byte-checkbox checkbot-item', 'text': '投资观点，仅供参考', 'value': '', 'type': ''}, {'tag': 'INPUT', 'class': '', 'text': '', 'value': '7', 'type': 'checkbox'}, {'tag': 'LABEL', 'class': 'byte-checkbox checkbot-item', 'text': '健康医疗分享，仅供参考', 'value': '', 'type': ''}, {'tag': 'INPUT', 'class': '', 'text': '', 'value': '8', 'type': 'checkbox'}]
+2026-04-14 10:30:13 | ERROR    | publisher.toutiao_publisher:_diagnose_element_not_found:141 - [诊断] 页面上所有 button: [{'tag': 'BUTTON', 'class': 'syl-toolbar-button', 'text': '图片'}, {'tag': 'BUTTON', 'class': 'syl-toolbar-button', 'text': '表情'}, {'tag': 'BUTTON', 'class': 'syl-toolbar-button', 'text': '话题'}, {'tag': 'BUTTON', 'class': 'syl-toolbar-button', 'text': '文档导入'}, {'tag': 'BUTTON', 'class': 'byte-btn byte-btn-default byte-btn-size-default byte-btn-shape-square save-draft', 'text': '存草稿'}, {'tag': 'BUTTON', 'class': 'byte-btn byte-btn-primary byte-btn-size-default byte-btn-shape-square publish-content', 'text': '发布'}]
+2026-04-14 10:30:13 | ERROR    | publisher.toutiao_publisher:_diagnose_element_not_found:142 - [诊断] 页面上所有 contenteditable: [{'tag': 'DIV', 'class': 'ProseMirror ProseMirror-focused', 'text': 'This is an auto-published test content.Chinese rob'}]
+2026-04-14 10:30:13 | ERROR    | publisher.toutiao_publisher:_diagnose_element_not_found:143 - [诊断] 页面上所有 input/textarea: [{'tag': 'INPUT', 'class': '', 'placeholder': '', 'name': '', 'type': 'checkbox'}, {'tag': 'INPUT', 'class': '', 'placeholder': '', 'name': '', 'type': 'text'}, {'tag': 'INPUT', 'class': '', 'placeholder': '', 'name': '', 'type': 'checkbox'}, {'tag': 'INPUT', 'class': '', 'placeholder': '', 'name': '', 'type': 'checkbox'}, {'tag': 'INPUT', 'class': '', 'placeholder': '', 'name': '', 'type': 'checkbox'}, {'tag': 'INPUT', 'class': '', 'placeholder': '', 'name': '', 'type': 'checkbox'}, {'tag': 'INPUT', 'class': '', 'placeholder': '', 'name': '', 'type': 'checkbox'}, {'tag': 'INPUT', 'class': '', 'placeholder': '', 'name': '', 'type': 'checkbox'}, {'tag': 'INPUT', 'class': '', 'placeholder': '', 'name': '', 'type': 'checkbox'}]
+2026-04-14 10:32:21 | INFO     | publisher.toutiao_publisher:login:165 - [Publisher] 加载了 31 个已保存的 Cookie
+2026-04-14 10:32:27 | INFO     | publisher.toutiao_publisher:login:176 - [Publisher] Cookie 有效，自动登录成功！
+2026-04-14 10:32:27 | INFO     | publisher.toutiao_publisher:_save_cookies:222 - [Publisher] 获取到 31 个 cookies
+2026-04-14 10:32:27 | INFO     | publisher.toutiao_publisher:_save_cookies:227 - [Publisher] Cookie 域名分布：{'mp.toutiao.com': 7, '.toutiao.com': 24}
+2026-04-14 10:32:27 | INFO     | utils.cookie_manager:save_cookies:34 - Cookie 已保存: toutiao -> D:\Python\bigmodel\coze\data\cookies\toutiao_cookies.json
+2026-04-14 10:32:27 | INFO     | publisher.toutiao_publisher:_save_cookies:229 - [Publisher] Cookie 已保存到：D:\Python\bigmodel\coze\data\cookies
+2026-04-14 10:32:40 | WARNING  | publisher.toutiao_publisher:_close_assistant_drawer:406 - [Publisher] ESC 无法关闭发布助手弹窗，尝试强制移除遮罩层
+2026-04-14 10:32:40 | INFO     | publisher.toutiao_publisher:_close_assistant_drawer:421 - [Publisher] 强制处理结果: hidden_wrapper
+2026-04-14 10:32:42 | INFO     | publisher.toutiao_publisher:_build_micro_content:593 - [Publisher] 内容组装完成: 111字正文 + 5个话题
+2026-04-14 10:32:42 | INFO     | publisher.toutiao_publisher:_type_content:458 - [Publisher] 找到编辑器：div.syl-editor div.ProseMirror
+2026-04-14 10:32:42 | INFO     | publisher.toutiao_publisher:_type_content:472 - [Publisher] 通过 JS insertHTML 输入内容成功
+2026-04-14 10:32:44 | INFO     | publisher.toutiao_publisher:_add_location:613 - [Publisher] 开始添加位置: 龙华区
+2026-04-14 10:32:47 | INFO     | publisher.toutiao_publisher:_add_location:643 - [Publisher] 无下拉选项，尝试回车确认
+2026-04-14 10:32:47 | INFO     | publisher.toutiao_publisher:_add_location:647 - [Publisher] ✅ 已添加位置: 龙华区
+2026-04-14 10:32:48 | INFO     | publisher.toutiao_publisher:_add_ai_declaration:663 - [Publisher] 开始勾选「引用AI」声明...
+2026-04-14 10:32:49 | INFO     | publisher.toutiao_publisher:_add_ai_declaration:682 - [Publisher] ✅ 已勾选「引用AI」声明
+2026-04-14 10:33:34 | INFO     | publisher.toutiao_publisher:login:165 - [Publisher] 加载了 31 个已保存的 Cookie
+2026-04-14 10:33:59 | INFO     | publisher.toutiao_publisher:login:176 - [Publisher] Cookie 有效，自动登录成功！
+2026-04-14 10:33:59 | INFO     | publisher.toutiao_publisher:_save_cookies:222 - [Publisher] 获取到 31 个 cookies
+2026-04-14 10:33:59 | INFO     | publisher.toutiao_publisher:_save_cookies:227 - [Publisher] Cookie 域名分布：{'mp.toutiao.com': 7, '.toutiao.com': 24}
+2026-04-14 10:33:59 | INFO     | utils.cookie_manager:save_cookies:34 - Cookie 已保存: toutiao -> D:\Python\bigmodel\coze\data\cookies\toutiao_cookies.json
+2026-04-14 10:33:59 | INFO     | publisher.toutiao_publisher:_save_cookies:229 - [Publisher] Cookie 已保存到：D:\Python\bigmodel\coze\data\cookies
+2026-04-14 10:34:31 | WARNING  | publisher.toutiao_publisher:_close_assistant_drawer:406 - [Publisher] ESC 无法关闭发布助手弹窗，尝试强制移除遮罩层
+2026-04-14 10:34:31 | INFO     | publisher.toutiao_publisher:_close_assistant_drawer:421 - [Publisher] 强制处理结果: hidden_wrapper
+2026-04-14 10:34:32 | INFO     | publisher.toutiao_publisher:_build_micro_content:593 - [Publisher] 内容组装完成: 111字正文 + 5个话题
+2026-04-14 10:34:32 | INFO     | publisher.toutiao_publisher:_type_content:458 - [Publisher] 找到编辑器：div.syl-editor div.ProseMirror
+2026-04-14 10:34:32 | INFO     | publisher.toutiao_publisher:_type_content:472 - [Publisher] 通过 JS insertHTML 输入内容成功
+2026-04-14 10:34:34 | INFO     | publisher.toutiao_publisher:_add_location:613 - [Publisher] 开始添加位置: 龙华区
+2026-04-14 10:34:37 | INFO     | publisher.toutiao_publisher:_add_location:643 - [Publisher] 无下拉选项，尝试回车确认
+2026-04-14 10:34:38 | INFO     | publisher.toutiao_publisher:_add_location:647 - [Publisher] ✅ 已添加位置: 龙华区
+2026-04-14 10:34:39 | INFO     | publisher.toutiao_publisher:_add_ai_declaration:663 - [Publisher] 开始勾选「引用AI」声明...
+2026-04-14 10:34:39 | INFO     | publisher.toutiao_publisher:_add_ai_declaration:682 - [Publisher] ✅ 已勾选「引用AI」声明
+2026-04-14 10:34:41 | INFO     | publisher.toutiao_publisher:_publish:724 - [Publisher] 开始发布...
+2026-04-14 10:34:44 | INFO     | publisher.toutiao_publisher:_publish:732 - [Publisher] ✅ 已点击发布按钮
+2026-04-14 10:40:04 | INFO     | webui.app:main:73 - [启动] 开始初始化...
+2026-04-14 10:40:04 | INFO     | webui.app:main:105 - [启动] 配置参数: port=7860, host=127.0.0.1, share=False
+2026-04-14 10:40:04 | INFO     | webui.app:main:108 - [启动] 正在创建 Gradio 应用...
+2026-04-14 10:40:04 | INFO     | webui.app:create_app:20 - [应用创建] 开始创建 Gradio 应用...
+2026-04-14 10:40:04 | INFO     | webui.app:create_app:27 - [应用创建] 配置读取耗时: 0.000秒
+2026-04-14 10:40:07 | INFO     | webui.app:create_app:57 - [应用创建] 应用创建完成，总耗时: 3.634秒
+2026-04-14 10:40:07 | INFO     | webui.app:main:111 - [启动] 应用创建完成，耗时: 3.64秒
+2026-04-14 10:40:07 | INFO     | webui.app:main:112 - [启动] 启动 Gradio Web UI... (http://127.0.0.1:7860)
+2026-04-14 10:40:23 | INFO     | webui.tabs.publish_tab:toggle_auto_publish:520 - [Publisher] 自动发布已开启
+2026-04-14 10:40:24 | INFO     | models.generated_store:_load:46 - [GeneratedStore] 加载 4 篇生成文章
+2026-04-14 10:40:37 | INFO     | agent.tools:fetch_hot_topics:147 - [热点] toutiao: 获取 15 条原始热点
+2026-04-14 10:40:38 | WARNING  | agent.tools:_fetch_weibo_hot:392 - [热点] 微博热搜获取失败: Expecting value: line 1 column 1 (char 0)
+2026-04-14 10:40:39 | INFO     | agent.tools:fetch_hot_topics:147 - [热点] weibo: 获取 20 条原始热点
+2026-04-14 10:40:39 | INFO     | agent.tools:fetch_hot_topics:147 - [热点] baidu: 获取 20 条原始热点
+2026-04-14 10:40:39 | INFO     | agent.tools:fetch_hot_topics:157 - [热点] 跨平台去重: 55 → 35 条
+2026-04-14 10:40:39 | INFO     | agent.tools:fetch_hot_topics:164 - [热点] 关键词过滤: 35 → 0 条
+2026-04-14 10:40:42 | INFO     | agent.tools:fetch_hot_topics:172 - [热点] 语义扩展: +10 条
+2026-04-14 10:41:52 | INFO     | webui.tabs.generate_tab:generate_article:118 - [生成] hot_topic='加快男性衰老的原因：喝酒仅第7，排在第1的，很多男性还没发现！ (热度:0)', custom_topic='40岁失业，该怎么办', topic='40岁失业，该怎么办'
+2026-04-14 10:41:52 | INFO     | rag.vectorstore:load:94 - 索引已加载: 3706 条向量, 1310 篇文章
+2026-04-14 10:41:52 | INFO     | agent.content_agent:generate_article:78 - [Agent] 话题确定: 40岁失业，该怎么办
+2026-04-14 10:41:53 | INFO     | models.article_store:_load_all:213 - [ArticleStore] 加载 1818 篇文章
+2026-04-14 10:41:53 | INFO     | agent.tools:_ensure_index_fresh:76 - [RAG] 检测到 508 篇新文章，增量索引...
+2026-04-14 10:41:53 | INFO     | models.article_store:_load_all:213 - [ArticleStore] 加载 1818 篇文章
+2026-04-14 10:41:53 | INFO     | agent.tools:_auto_build_index:48 - [RAG] 索引需要构建/重建，自动执行增量重建...
+2026-04-14 10:41:53 | INFO     | rag.vectorstore:load:94 - 索引已加载: 3706 条向量, 1310 篇文章
+2026-04-14 10:41:53 | INFO     | rag.vectorstore:remove_zero_vectors:147 - 未发现零向量，无需清理
+2026-04-14 10:41:53 | INFO     | agent.pipeline:_load_articles_from_store:424 - [Pipeline] 从 ArticleStore 加载 1310 篇有正文的文章
+2026-04-14 10:41:53 | INFO     | agent.pipeline:rebuild_incremental:375 - [Pipeline] 增量重建完成: 增量重建完成: 3706 条向量, 1310 篇文章 (索引已是最新) (耗时 0秒)
+2026-04-14 10:41:53 | INFO     | agent.tools:_auto_build_index:55 - [RAG] 自动构建完成: 增量重建完成: 3706 条向量, 1310 篇文章 (索引已是最新)
+2026-04-14 10:41:53 | DEBUG    | rag.embedder:embed_texts:40 - Embedding 批次 1: 1 条
+2026-04-14 10:41:54 | DEBUG    | rag.retriever:retrieve:56 - 检索 '40岁失业，该怎么办...' 返回 10 条结果
+2026-04-14 10:41:54 | INFO     | agent.content_agent:generate_article:82 - [Agent] RAG 检索完成，获取 3840 字参考素材
+2026-04-14 10:41:54 | INFO     | agent.content_agent:generate_article:85 - [Agent] 生成文章大纲...
+2026-04-14 10:42:11 | INFO     | agent.content_agent:generate_article:92 - [Agent] 生成文章正文...
+2026-04-14 10:42:28 | INFO     | agent.content_agent:generate_article:96 - [Agent] 润色文章...
+2026-04-14 10:42:48 | INFO     | agent.content_agent:_adjust_word_count:192 - [Agent] 字数不足 (692), 补充内容...
+2026-04-14 10:43:18 | INFO     | agent.content_agent:generate_article:111 - [Agent] 生成爆款标题...
+2026-04-14 10:43:41 | INFO     | agent.content_agent:generate_article:116 - [Agent] 最终标题: 40岁失业第37天，我靠这3个不可替代性翻身 (评分: 5.0)
+2026-04-14 10:43:41 | INFO     | agent.content_agent:generate_article:119 - [Agent] 提取配图场景...
+2026-04-14 10:43:46 | INFO     | models.generated_store:add:66 - [GeneratedStore] 保存生成文章: 5bd654ac - 40岁失业第37天，我靠这3个不可替代性翻身
+2026-04-14 10:43:46 | INFO     | webui.tabs.generate_tab:generate_article:143 - [生成] 文章已缓存: 5bd654ac
+2026-04-14 10:43:46 | INFO     | webui.tabs.generate_tab:generate_article:196 - [生成] 配图 1/4: 深夜卧室，40岁男子睁眼望天花板，窗外漆黑，床头堆着账单和房...
+2026-04-14 10:43:46 | INFO     | image_gen.cartoon_gen:generate:55 - [图片] 开始生成 1 张图片, 模型: wanx2.1-t2i-turbo
+2026-04-14 10:43:51 | DEBUG    | image_gen.cartoon_gen:_submit_tasks:122 - [图片] 任务已提交: b61b8474-e3ea-4dcc-a5fa-2b572ea8775a
+2026-04-14 10:43:51 | INFO     | image_gen.cartoon_gen:generate:64 - [图片] 已提交 1 个任务，等待生成...
+2026-04-14 10:44:02 | INFO     | image_gen.cartoon_gen:_poll_all_tasks:148 - [图片] 任务 b61b8474... 完成
+2026-04-14 10:44:03 | INFO     | image_gen.cartoon_gen:_download_image:199 - [图片] 已保存: D:\Python\bigmodel\coze\output\images\5bd654ac\9453ead9_0.png
+2026-04-14 10:44:03 | INFO     | image_gen.cartoon_gen:generate:77 - [图片] 生成完成: 1/1 张
+2026-04-14 10:44:03 | INFO     | webui.tabs.generate_tab:generate_article:201 - [生成] 配图 1 完成: D:\Python\bigmodel\coze\output\images\5bd654ac\9453ead9_0.png
+2026-04-14 10:44:03 | INFO     | webui.tabs.generate_tab:generate_article:196 - [生成] 配图 2/4: 中年主角整理海外客户名单，桌上摊开笔记本电脑和咖啡，背景是自...
+2026-04-14 10:44:03 | INFO     | image_gen.cartoon_gen:generate:55 - [图片] 开始生成 1 张图片, 模型: wanx2.1-t2i-turbo
+2026-04-14 10:44:04 | DEBUG    | image_gen.cartoon_gen:_submit_tasks:122 - [图片] 任务已提交: d54f446c-d013-435d-ba25-b2f774d1ef11
+2026-04-14 10:44:05 | INFO     | image_gen.cartoon_gen:generate:64 - [图片] 已提交 1 个任务，等待生成...
+2026-04-14 10:44:16 | INFO     | image_gen.cartoon_gen:_poll_all_tasks:148 - [图片] 任务 d54f446c... 完成
+2026-04-14 10:44:17 | INFO     | image_gen.cartoon_gen:_download_image:199 - [图片] 已保存: D:\Python\bigmodel\coze\output\images\5bd654ac\f38c3903_0.png
+2026-04-14 10:44:17 | INFO     | image_gen.cartoon_gen:generate:77 - [图片] 生成完成: 1/1 张
+2026-04-14 10:44:17 | INFO     | webui.tabs.generate_tab:generate_article:201 - [生成] 配图 2 完成: D:\Python\bigmodel\coze\output\images\5bd654ac\f38c3903_0.png
+2026-04-14 10:44:17 | INFO     | webui.tabs.generate_tab:generate_article:196 - [生成] 配图 3/4: 卡通人物在社保局窗口办理灵活就业参保，手中拿着医保卡，表情安...
+2026-04-14 10:44:17 | INFO     | image_gen.cartoon_gen:generate:55 - [图片] 开始生成 1 张图片, 模型: wanx2.1-t2i-turbo
+2026-04-14 10:44:18 | DEBUG    | image_gen.cartoon_gen:_submit_tasks:122 - [图片] 任务已提交: 0677b3c6-db56-4a10-8f5e-03020319d06b
+2026-04-14 10:44:18 | INFO     | image_gen.cartoon_gen:generate:64 - [图片] 已提交 1 个任务，等待生成...
+2026-04-14 10:44:28 | INFO     | image_gen.cartoon_gen:_poll_all_tasks:148 - [图片] 任务 0677b3c6... 完成
+2026-04-14 10:44:29 | INFO     | image_gen.cartoon_gen:_download_image:199 - [图片] 已保存: D:\Python\bigmodel\coze\output\images\5bd654ac\2b797983_0.png
+2026-04-14 10:44:29 | INFO     | image_gen.cartoon_gen:generate:77 - [图片] 生成完成: 1/1 张
+2026-04-14 10:44:29 | INFO     | webui.tabs.generate_tab:generate_article:201 - [生成] 配图 3 完成: D:\Python\bigmodel\coze\output\images\5bd654ac\2b797983_0.png
+2026-04-14 10:44:29 | INFO     | webui.tabs.generate_tab:generate_article:196 - [生成] 配图 4/4: 职场人站在岔路口，一手握副业收入图表，一手提公文包，前方阳光...
+2026-04-14 10:44:29 | INFO     | image_gen.cartoon_gen:generate:55 - [图片] 开始生成 1 张图片, 模型: wanx2.1-t2i-turbo
+2026-04-14 10:44:29 | DEBUG    | image_gen.cartoon_gen:_submit_tasks:122 - [图片] 任务已提交: b6654867-2f55-4451-8822-f4ab717a5470
+2026-04-14 10:44:30 | INFO     | image_gen.cartoon_gen:generate:64 - [图片] 已提交 1 个任务，等待生成...
+2026-04-14 10:44:41 | INFO     | image_gen.cartoon_gen:_poll_all_tasks:148 - [图片] 任务 b6654867... 完成
+2026-04-14 10:44:42 | INFO     | image_gen.cartoon_gen:_download_image:199 - [图片] 已保存: D:\Python\bigmodel\coze\output\images\5bd654ac\a7a8ea8a_0.png
+2026-04-14 10:44:42 | INFO     | image_gen.cartoon_gen:generate:77 - [图片] 生成完成: 1/1 张
+2026-04-14 10:44:42 | INFO     | webui.tabs.generate_tab:generate_article:201 - [生成] 配图 4 完成: D:\Python\bigmodel\coze\output\images\5bd654ac\a7a8ea8a_0.png
+2026-04-14 10:44:42 | INFO     | utils.image_cache:save:70 - [ImageCache] 已缓存 4 张配图: 5bd654ac
+2026-04-14 10:44:43 | INFO     | publisher.toutiao_publisher:_load_cookies_to_page:378 - [Publisher] 加载了 31 个已保存的 Cookie
+2026-04-14 10:44:49 | INFO     | publisher.toutiao_publisher:_close_assistant_drawer:395 - [Publisher] 无发布助手弹窗 (第1次检查)
+2026-04-14 10:44:49 | INFO     | publisher.toutiao_publisher:_close_assistant_drawer:424 - [Publisher] ✅ 发布助手弹窗已关闭
+2026-04-14 10:44:49 | INFO     | publisher.toutiao_publisher:_build_micro_content:593 - [Publisher] 内容组装完成: 1544字正文 + 3个话题
+2026-04-14 10:44:49 | ERROR    | publisher.toutiao_publisher:_diagnose_element_not_found:138 - [诊断] 页面 URL: https://mp.toutiao.com/profile_v4/weitoutiao/publish?from=toutiao_pc
+2026-04-14 10:44:49 | ERROR    | publisher.toutiao_publisher:_diagnose_element_not_found:139 - [诊断] 页面标题: 头条号
+2026-04-14 10:44:49 | ERROR    | publisher.toutiao_publisher:_diagnose_element_not_found:140 - [诊断] 页面上所有 checkbox: []
+2026-04-14 10:44:49 | ERROR    | publisher.toutiao_publisher:_diagnose_element_not_found:141 - [诊断] 页面上所有 button: []
+2026-04-14 10:44:49 | ERROR    | publisher.toutiao_publisher:_diagnose_element_not_found:142 - [诊断] 页面上所有 contenteditable: []
+2026-04-14 10:44:49 | ERROR    | publisher.toutiao_publisher:_diagnose_element_not_found:143 - [诊断] 页面上所有 input/textarea: []
+2026-04-14 10:44:50 | ERROR    | publisher.toutiao_publisher:publish_article:327 - [Publisher] 发布失败: 未找到 [编辑器]，选择器: div.syl-editor div.ProseMirror[contenteditable="true"]，当前 URL: https://mp.toutiao.com/profile_v4/weitoutiao/publish?from=toutiao_pc，诊断信息已保存到: D:\Python\bigmodel\coze\publisher\data\publisher\missing_编辑器
+2026-04-14 10:46:21 | INFO     | publisher.toutiao_publisher:_load_cookies_to_page:378 - [Publisher] 加载了 31 个已保存的 Cookie
+2026-04-14 10:46:52 | WARNING  | publisher.toutiao_publisher:_close_assistant_drawer:406 - [Publisher] ESC 无法关闭发布助手弹窗，尝试强制移除遮罩层
+2026-04-14 10:46:52 | INFO     | publisher.toutiao_publisher:_close_assistant_drawer:421 - [Publisher] 强制处理结果: hidden_wrapper
+2026-04-14 10:46:52 | INFO     | publisher.toutiao_publisher:_build_micro_content:593 - [Publisher] 内容组装完成: 1460字正文 + 4个话题
+2026-04-14 10:46:52 | INFO     | publisher.toutiao_publisher:_type_content:458 - [Publisher] 找到编辑器：div.syl-editor div.ProseMirror
+2026-04-14 10:46:52 | INFO     | publisher.toutiao_publisher:_type_content:472 - [Publisher] 通过 JS insertHTML 输入内容成功
+2026-04-14 10:46:52 | INFO     | publisher.toutiao_publisher:_upload_images:509 - [Publisher] 开始粘贴上传 4 张配图...
+2026-04-14 10:46:53 | INFO     | publisher.toutiao_publisher:_upload_images:524 - [Publisher] 配图 1/4: 15f9d0b1_0.png
+2026-04-14 10:46:55 | INFO     | publisher.toutiao_publisher:_upload_images:565 - [Publisher] ✅ 配图 1/4 粘贴成功
+2026-04-14 10:46:55 | INFO     | publisher.toutiao_publisher:_upload_images:524 - [Publisher] 配图 2/4: 4e7ba777_0.png
+2026-04-14 10:46:57 | INFO     | publisher.toutiao_publisher:_upload_images:565 - [Publisher] ✅ 配图 2/4 粘贴成功
+2026-04-14 10:46:57 | INFO     | publisher.toutiao_publisher:_upload_images:524 - [Publisher] 配图 3/4: 806fe5e5_0.png
+2026-04-14 10:46:59 | INFO     | publisher.toutiao_publisher:_upload_images:565 - [Publisher] ✅ 配图 3/4 粘贴成功
+2026-04-14 10:46:59 | INFO     | publisher.toutiao_publisher:_upload_images:524 - [Publisher] 配图 4/4: 059db848_0.png
+2026-04-14 10:47:02 | INFO     | publisher.toutiao_publisher:_upload_images:565 - [Publisher] ✅ 配图 4/4 粘贴成功
+2026-04-14 10:47:02 | INFO     | publisher.toutiao_publisher:_upload_images:567 - [Publisher] 配图上传完成: 4 张成功
+2026-04-14 10:47:02 | INFO     | publisher.toutiao_publisher:_add_location:613 - [Publisher] 开始添加位置: 龙华区
+2026-04-14 10:47:05 | INFO     | publisher.toutiao_publisher:_add_location:643 - [Publisher] 无下拉选项，尝试回车确认
+2026-04-14 10:47:05 | INFO     | publisher.toutiao_publisher:_add_location:647 - [Publisher] ✅ 已添加位置: 龙华区
+2026-04-14 10:47:05 | INFO     | publisher.toutiao_publisher:_add_ai_declaration:663 - [Publisher] 开始勾选「引用AI」声明...
+2026-04-14 10:47:06 | INFO     | publisher.toutiao_publisher:_add_ai_declaration:682 - [Publisher] ✅ 已勾选「引用AI」声明
+2026-04-14 10:47:06 | INFO     | publisher.toutiao_publisher:_publish:724 - [Publisher] 开始发布...
+2026-04-14 10:47:09 | INFO     | publisher.toutiao_publisher:_publish:732 - [Publisher] ✅ 已点击发布按钮
+2026-04-14 10:57:31 | INFO     | webui.app:main:73 - [启动] 开始初始化...
+2026-04-14 10:57:31 | INFO     | webui.app:main:105 - [启动] 配置参数: port=7860, host=127.0.0.1, share=False
+2026-04-14 10:57:31 | INFO     | webui.app:main:108 - [启动] 正在创建 Gradio 应用...
+2026-04-14 10:57:31 | INFO     | webui.app:create_app:20 - [应用创建] 开始创建 Gradio 应用...
+2026-04-14 10:57:31 | INFO     | webui.app:create_app:27 - [应用创建] 配置读取耗时: 0.000秒
+2026-04-14 10:57:34 | INFO     | webui.app:create_app:57 - [应用创建] 应用创建完成，总耗时: 2.399秒
+2026-04-14 10:57:34 | INFO     | webui.app:main:111 - [启动] 应用创建完成，耗时: 2.40秒
+2026-04-14 10:57:34 | INFO     | webui.app:main:112 - [启动] 启动 Gradio Web UI... (http://127.0.0.1:7860)
+2026-04-14 10:57:44 | INFO     | publisher.toutiao_publisher:verify_login:252 - [Publisher] 加载了 31 个 cookies
+2026-04-14 10:57:54 | INFO     | webui.tabs.publish_tab:toggle_auto_publish:520 - [Publisher] 自动发布已开启
+2026-04-14 10:57:55 | INFO     | models.generated_store:_load:46 - [GeneratedStore] 加载 5 篇生成文章
+2026-04-14 10:58:09 | INFO     | publisher.toutiao_publisher:_load_cookies_to_page:403 - [Publisher] 加载了 31 个已保存的 Cookie
+2026-04-14 10:58:11 | INFO     | publisher.toutiao_publisher:verify_login:263 - [Publisher] 当前 URL: https://mp.toutiao.com/profile_v4/
+2026-04-14 10:58:21 | INFO     | publisher.toutiao_publisher:publish_micro_toutiao:371 - [Publisher] 页面加载完成，编辑器已渲染
+2026-04-14 10:58:26 | WARNING  | publisher.toutiao_publisher:_close_assistant_drawer:431 - [Publisher] ESC 无法关闭发布助手弹窗，尝试强制移除遮罩层
+2026-04-14 10:58:26 | INFO     | publisher.toutiao_publisher:_close_assistant_drawer:446 - [Publisher] 强制处理结果: hidden_wrapper
+2026-04-14 10:58:27 | INFO     | publisher.toutiao_publisher:_build_micro_content:618 - [Publisher] 内容组装完成: 1544字正文 + 5个话题
+2026-04-14 10:58:27 | INFO     | publisher.toutiao_publisher:_type_content:483 - [Publisher] 找到编辑器：div.syl-editor div.ProseMirror
+2026-04-14 10:58:27 | INFO     | publisher.toutiao_publisher:_type_content:497 - [Publisher] 通过 JS insertHTML 输入内容成功
+2026-04-14 10:58:27 | INFO     | publisher.toutiao_publisher:_upload_images:534 - [Publisher] 开始粘贴上传 4 张配图...
+2026-04-14 10:58:28 | INFO     | publisher.toutiao_publisher:_upload_images:549 - [Publisher] 配图 1/4: 9453ead9_0.png
+2026-04-14 10:58:30 | INFO     | publisher.toutiao_publisher:_upload_images:590 - [Publisher] ✅ 配图 1/4 粘贴成功
+2026-04-14 10:58:30 | INFO     | publisher.toutiao_publisher:_upload_images:549 - [Publisher] 配图 2/4: f38c3903_0.png
+2026-04-14 10:58:32 | INFO     | publisher.toutiao_publisher:_upload_images:590 - [Publisher] ✅ 配图 2/4 粘贴成功
+2026-04-14 10:58:32 | INFO     | publisher.toutiao_publisher:_upload_images:549 - [Publisher] 配图 3/4: 2b797983_0.png
+2026-04-14 10:58:34 | INFO     | publisher.toutiao_publisher:_upload_images:590 - [Publisher] ✅ 配图 3/4 粘贴成功
+2026-04-14 10:58:34 | INFO     | publisher.toutiao_publisher:_upload_images:549 - [Publisher] 配图 4/4: a7a8ea8a_0.png
+2026-04-14 10:58:36 | INFO     | publisher.toutiao_publisher:_upload_images:590 - [Publisher] ✅ 配图 4/4 粘贴成功
+2026-04-14 10:58:36 | INFO     | publisher.toutiao_publisher:_upload_images:592 - [Publisher] 配图上传完成: 4 张成功
+2026-04-14 10:58:36 | INFO     | publisher.toutiao_publisher:_add_location:638 - [Publisher] 开始添加位置: 龙华区
+2026-04-14 10:58:39 | INFO     | publisher.toutiao_publisher:_add_location:668 - [Publisher] 无下拉选项，尝试回车确认
+2026-04-14 10:58:40 | INFO     | publisher.toutiao_publisher:_add_location:672 - [Publisher] ✅ 已添加位置: 龙华区
+2026-04-14 10:58:40 | INFO     | publisher.toutiao_publisher:_add_ai_declaration:688 - [Publisher] 开始勾选「引用AI」声明...
+2026-04-14 10:58:40 | INFO     | publisher.toutiao_publisher:_add_ai_declaration:707 - [Publisher] ✅ 已勾选「引用AI」声明
+2026-04-14 10:58:40 | INFO     | publisher.toutiao_publisher:_publish:749 - [Publisher] 开始发布...
+2026-04-14 10:58:41 | INFO     | publisher.toutiao_publisher:_publish:763 - [Publisher] 已点击发布按钮，等待发布结果...
+2026-04-14 10:58:41 | ERROR    | publisher.toutiao_publisher:publish_micro_toutiao:395 - [Publisher] 发布失败：Page.wait_for_function() takes 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
+2026-04-14 11:01:36 | INFO     | webui.app:main:73 - [启动] 开始初始化...
+2026-04-14 11:01:36 | INFO     | webui.app:main:105 - [启动] 配置参数: port=7860, host=127.0.0.1, share=False
+2026-04-14 11:01:36 | INFO     | webui.app:main:108 - [启动] 正在创建 Gradio 应用...
+2026-04-14 11:01:36 | INFO     | webui.app:create_app:20 - [应用创建] 开始创建 Gradio 应用...
+2026-04-14 11:01:36 | INFO     | webui.app:create_app:27 - [应用创建] 配置读取耗时: 0.000秒
+2026-04-14 11:01:38 | INFO     | webui.app:create_app:57 - [应用创建] 应用创建完成，总耗时: 2.200秒
+2026-04-14 11:01:38 | INFO     | webui.app:main:111 - [启动] 应用创建完成，耗时: 2.20秒
+2026-04-14 11:01:38 | INFO     | webui.app:main:112 - [启动] 启动 Gradio Web UI... (http://127.0.0.1:7860)
+2026-04-14 11:01:47 | INFO     | models.generated_store:_load:46 - [GeneratedStore] 加载 5 篇生成文章
+2026-04-14 11:01:51 | INFO     | publisher.toutiao_publisher:_load_cookies_to_page:403 - [Publisher] 加载了 31 个已保存的 Cookie
+2026-04-14 11:02:01 | INFO     | publisher.toutiao_publisher:publish_micro_toutiao:371 - [Publisher] 页面加载完成，编辑器已渲染
+2026-04-14 11:02:06 | WARNING  | publisher.toutiao_publisher:_close_assistant_drawer:431 - [Publisher] ESC 无法关闭发布助手弹窗，尝试强制移除遮罩层
+2026-04-14 11:02:06 | INFO     | publisher.toutiao_publisher:_close_assistant_drawer:446 - [Publisher] 强制处理结果: hidden_wrapper
+2026-04-14 11:02:06 | INFO     | publisher.toutiao_publisher:_build_micro_content:618 - [Publisher] 内容组装完成: 1544字正文 + 5个话题
+2026-04-14 11:02:06 | INFO     | publisher.toutiao_publisher:_type_content:483 - [Publisher] 找到编辑器：div.syl-editor div.ProseMirror
+2026-04-14 11:02:07 | INFO     | publisher.toutiao_publisher:_type_content:497 - [Publisher] 通过 JS insertHTML 输入内容成功
+2026-04-14 11:02:07 | INFO     | publisher.toutiao_publisher:_upload_images:534 - [Publisher] 开始粘贴上传 4 张配图...
+2026-04-14 11:02:07 | INFO     | publisher.toutiao_publisher:_upload_images:549 - [Publisher] 配图 1/4: 9453ead9_0.png
+2026-04-14 11:02:09 | INFO     | publisher.toutiao_publisher:_upload_images:590 - [Publisher] ✅ 配图 1/4 粘贴成功
+2026-04-14 11:02:09 | INFO     | publisher.toutiao_publisher:_upload_images:549 - [Publisher] 配图 2/4: f38c3903_0.png
+2026-04-14 11:02:12 | INFO     | publisher.toutiao_publisher:_upload_images:590 - [Publisher] ✅ 配图 2/4 粘贴成功
+2026-04-14 11:02:12 | INFO     | publisher.toutiao_publisher:_upload_images:549 - [Publisher] 配图 3/4: 2b797983_0.png
+2026-04-14 11:02:14 | INFO     | publisher.toutiao_publisher:_upload_images:590 - [Publisher] ✅ 配图 3/4 粘贴成功
+2026-04-14 11:02:14 | INFO     | publisher.toutiao_publisher:_upload_images:549 - [Publisher] 配图 4/4: a7a8ea8a_0.png
+2026-04-14 11:02:16 | INFO     | publisher.toutiao_publisher:_upload_images:590 - [Publisher] ✅ 配图 4/4 粘贴成功
+2026-04-14 11:02:16 | INFO     | publisher.toutiao_publisher:_upload_images:592 - [Publisher] 配图上传完成: 4 张成功
+2026-04-14 11:02:16 | INFO     | publisher.toutiao_publisher:_add_location:638 - [Publisher] 开始添加位置: 龙华区
+2026-04-14 11:02:19 | INFO     | publisher.toutiao_publisher:_add_location:668 - [Publisher] 无下拉选项，尝试回车确认
+2026-04-14 11:02:19 | INFO     | publisher.toutiao_publisher:_add_location:672 - [Publisher] ✅ 已添加位置: 龙华区
+2026-04-14 11:02:19 | INFO     | publisher.toutiao_publisher:_add_ai_declaration:688 - [Publisher] 开始勾选「引用AI」声明...
+2026-04-14 11:02:20 | INFO     | publisher.toutiao_publisher:_add_ai_declaration:707 - [Publisher] ✅ 已勾选「引用AI」声明
+2026-04-14 11:02:20 | INFO     | publisher.toutiao_publisher:_publish:749 - [Publisher] 开始发布...
+2026-04-14 11:02:21 | INFO     | publisher.toutiao_publisher:_publish:763 - [Publisher] 已点击发布按钮，等待发布结果...
+2026-04-14 11:02:21 | INFO     | publisher.toutiao_publisher:_publish:786 - [Publisher] 发布响应已返回，当前URL: https://mp.toutiao.com/profile_v4/weitoutiao/publish
+2026-04-14 11:02:23 | INFO     | publisher.toutiao_publisher:_publish:802 - [Publisher] ✅ 发布流程结束，结果截图: D:\Python\bigmodel\coze\publisher\data\publisher\publish_result.png
