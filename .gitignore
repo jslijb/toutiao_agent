@@ -1,10 +1,15 @@
 # 忽略 data 目录及其所有内容
-data/
+data/*
+!data/.gitkeep
 # 忽略 log 目录及其所有内容
-log/
+logs/*
+!logs/.gitkeep
 # 忽略 output 目录及其所有内容
-output/
+output/*
+!output/.gitkeep
 # 忽略 publisher/data 目录及其所有内容
-publisher/data/
+publisher/data/*
+!publisher/data/.gitkeep
 # 忽略 toutiao 目录及其所有内容
-toutiao/
+toutiao/*
+!toutiao/.gitkeep
