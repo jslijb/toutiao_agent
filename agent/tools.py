@@ -163,6 +163,24 @@ class HotTopicTool:
         filtered = self._keyword_filter(all_topics, filter_keywords)
         logger.info(f"[热点] 关键词过滤: {len(all_topics)} → {len(filtered)} 条")
 
+        # 关键词过滤结果太少时，按热度补充通用热点（避免LLM扩展失败后无热点可用）
+        min_topics_threshold = 5
+        if len(filtered) < min_topics_threshold:
+            before_supplement = len(filtered)
+            filtered_titles = {t.get("title", "") for t in filtered}
+            hot_supplement = sorted(
+                [t for t in all_topics if t.get("title", "") not in filtered_titles],
+                key=lambda x: x.get("heat", 0), reverse=True,
+            )
+            for t in hot_supplement:
+                if len(filtered) >= max_topics:
+                    break
+                t["matched_keyword"] = "热度补充"
+                filtered.append(t)
+            supplemented = len(filtered) - before_supplement
+            if supplemented > 0:
+                logger.info(f"[热点] 热度补充: +{supplemented} 条（关键词过滤结果不足{min_topics_threshold}条）")
+
         # 第三步：LLM 语义扩展（从关键词未命中的热点中，发现可切入的话题）
         if use_llm_filter:
             before = len(filtered)
@@ -173,9 +191,9 @@ class HotTopicTool:
 
         if not filtered:
             logger.warning("[热点] 过滤后无相关热点，建议检查关键词配置或等待热点更新")
-            # 回退时也只取热度 Top5，避免返回大量无关热点
+            # 回退时也只取热度 TopN，避免返回大量无关热点
             all_topics.sort(key=lambda x: x.get("heat", 0), reverse=True)
-            return all_topics[:5]
+            return all_topics[:max_topics]
 
         # 第四步：LLM 智能筛选精选（从候选中选出最贴合领域的高质量热点）
         if use_llm_filter and len(filtered) > max_topics:

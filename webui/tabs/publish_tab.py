@@ -7,6 +7,7 @@ from loguru import logger
 from config.settings import settings
 from models.generated_store import get_generated_store
 from publisher.toutiao_publisher import get_toutiao_publisher, close_publisher
+from services.image_regen_service import regen_service
 from utils.image_cache import image_cache
 from webui.tabs.generate_tab import get_latest_article
 
@@ -104,6 +105,8 @@ def create_publish_tab() -> gr.Blocks:
                         label="配图预览",
                         height=400,
                     )
+                    regen_images_btn = gr.Button("一键重新生成配图", variant="primary", visible=False)
+                    regen_status = gr.Textbox(label="重新生成状态", interactive=False, visible=False)
 
         # ── 发布操作 ─────────────────────────────
         with gr.Row():
@@ -137,7 +140,7 @@ def create_publish_tab() -> gr.Blocks:
         article_selector.change(
             fn=select_article,
             inputs=[article_selector],
-            outputs=[title_display, final_content, info_display, image_gallery, _selected_article_id],
+            outputs=[title_display, final_content, info_display, image_gallery, _selected_article_id, regen_images_btn],
         )
 
         # 刷新
@@ -147,7 +150,7 @@ def create_publish_tab() -> gr.Blocks:
         ).then(
             fn=select_article,
             inputs=[article_selector],
-            outputs=[title_display, final_content, info_display, image_gallery, _selected_article_id],
+            outputs=[title_display, final_content, info_display, image_gallery, _selected_article_id, regen_images_btn],
         )
 
         # 复制
@@ -171,6 +174,13 @@ def create_publish_tab() -> gr.Blocks:
             fn=do_batch_publish,
             inputs=[category],
             outputs=[publish_result],
+        )
+
+        # 重新生成配图
+        regen_images_btn.click(
+            fn=on_regen_from_publish_tab,
+            inputs=[_selected_article_id],
+            outputs=[image_gallery, regen_status, regen_images_btn],
         )
 
         # 历史
@@ -302,9 +312,8 @@ def select_article(article_id):
     _current_article_id = article_id
     article = _get_article(article_id)
     if not article:
-        return "未选择文章", "", "请选择一篇文章", [], ""
+        return "未选择文章", "", "请选择一篇文章", [], "", gr.update(visible=False)
 
-    # 从缓存加载图片
     image_paths = article.image_paths
     cached = image_cache.get(article.id)
     if cached and cached.get("image_paths"):
@@ -329,7 +338,11 @@ def select_article(article_id):
             if Path(path).exists():
                 images.append(path)
 
-    return article.title, content, "\n".join(info_lines), images, article.id
+    padded_paths = list(image_paths[:4]) + [None] * (4 - len(image_paths[:4]))
+    failure_status = regen_service.detect_failure_status(padded_paths)
+    regen_visible = failure_status.failure_type != "none"
+
+    return article.title, content, "\n".join(info_lines), images, article.id, gr.update(visible=regen_visible)
 
 
 def refresh_publish():
@@ -514,9 +527,22 @@ def refresh_history():
 def toggle_auto_publish(enabled: bool):
     """切换自动发布设置"""
     try:
-        # 更新运行时配置
         settings.publisher.auto_publish = enabled
         status = "开启" if enabled else "关闭"
         logger.info(f"[Publisher] 自动发布已{status}")
     except Exception as e:
         logger.warning(f"切换自动发布设置失败: {e}")
+
+
+def on_regen_from_publish_tab(article_id: str):
+    """发布准备Tab中的一键重新生成回调"""
+    article = _get_article(article_id)
+    if not article:
+        yield [], "请先选择文章", gr.update(visible=False)
+        return
+
+    for paths, status_msg in regen_service.regenerate_article_images(article, scope="all"):
+        images = [p for p in paths if p]
+        failure_status = regen_service.detect_failure_status(paths)
+        regen_visible = failure_status.failure_type != "none"
+        yield images, status_msg, gr.update(visible=regen_visible)

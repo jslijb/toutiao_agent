@@ -6,7 +6,7 @@ from typing import Optional
 import numpy as np
 from loguru import logger
 
-from rag.embedder import DashScopeEmbedder
+from rag.embedder import BaseEmbedder, create_embedder
 from rag.vectorstore import FAISSVectorStore
 from config.settings import settings
 
@@ -17,10 +17,12 @@ class Retriever:
     def __init__(
         self,
         vectorstore: Optional[FAISSVectorStore] = None,
-        embedder: Optional[DashScopeEmbedder] = None,
+        embedder: Optional[BaseEmbedder] = None,
     ):
-        self.embedder = embedder or DashScopeEmbedder()
+        self.embedder = embedder or create_embedder()
         self.vectorstore = vectorstore or FAISSVectorStore()
+        if self.vectorstore.index is None and self.vectorstore.index_path.exists():
+            self.vectorstore.load()
 
     def retrieve(self, query: str, top_k: int = 10) -> list[dict]:
         """
@@ -50,6 +52,7 @@ class Retriever:
                 "source": meta.get("source", ""),
                 "url": meta.get("url", ""),
                 "quality_score": meta.get("quality_score", 0),
+                "quality_label": meta.get("quality_label", ""),
             }
             retrieved.append(item)
 

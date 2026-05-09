@@ -17,6 +17,8 @@ class _EnvSettings:
 
     def __init__(self):
         self.dashscope_api_key: str = os.environ.get("DASHSCOPE_API_KEY", "")
+        self.tianapi_key: str = os.environ.get("TIANAPI_KEY", "")
+        self.bing_api_key: str = os.environ.get("BING_API_KEY", "")
         self.http_proxy: str = os.environ.get("HTTP_PROXY", "")
         self.https_proxy: str = os.environ.get("HTTPS_PROXY", "")
 
@@ -46,6 +48,8 @@ class EmbeddingConfig:
         self.dimension: int = data.get("dimension", 1024)
         self.batch_size: int = data.get("batch_size", 25)
         self.batch_interval: float = data.get("batch_interval", 1.0)
+        self.model_path: str = data.get("model_path", "")
+        self.device: str = data.get("device", "")
 
 
 class ImageGenConfig:
@@ -87,6 +91,23 @@ class CrawlerConfig:
         self.article_ttl_days: int = crawler.get("article_ttl_days", 30)  # 文章保留天数
         self.fetch_detail: bool = crawler.get("fetch_detail", True)  # 是否抓取详情页全文
         self.max_article_age_days: int = crawler.get("max_article_age_days", 365)  # 文章最大天数（超过则过滤）
+
+
+# ── 数据源配置 ──────────────────────────────────────
+class DatasourceConfig:
+    def __init__(self, data: dict):
+        ds = data.get("datasource", {})
+        self.corpus_news_path: str = ds.get("corpus_news_path", "")
+        self.corpus_qa_path: str = ds.get("corpus_qa_path", "")
+        self.corpus_min_content_length: int = ds.get("corpus_min_content_length", 200)
+        self.corpus_batch_size: int = ds.get("corpus_batch_size", 1000)
+        self.tianapi_base_url: str = ds.get("tianapi_base_url", "https://apis.tianapi.com")
+        self.tianapi_balance_alert_threshold: float = ds.get("tianapi_balance_alert_threshold", 100)
+        self.tianapi_total_beans: float = ds.get("tianapi_total_beans", 1000)
+        self.bing_monthly_quota: int = ds.get("bing_monthly_quota", 1000)
+        self.bing_endpoint: str = ds.get("bing_endpoint", "https://api.bing.microsoft.com/v7.0/news/search")
+        self.rss_fetch_fulltext: bool = ds.get("rss_fetch_fulltext", False)
+        self.rss_sources: list[dict] = ds.get("rss_sources", [])
 
 
 # ── 生成配置 ──────────────────────────────────────────
@@ -151,6 +172,7 @@ class Settings:
 
         self.models = ModelsConfig(raw)
         self.crawler = CrawlerConfig(raw)
+        self.datasource = DatasourceConfig(raw)
         self.generation = GenerationConfig(raw)
         self.hot_topics = HotTopicsConfig(raw)
         self.publisher = PublisherConfig(raw)
@@ -175,6 +197,7 @@ class Settings:
         raw = _load_yaml(yaml_path) if yaml_path.exists() else {}
         self.models = ModelsConfig(raw)
         self.crawler = CrawlerConfig(raw)
+        self.datasource = DatasourceConfig(raw)
         self.generation = GenerationConfig(raw)
         self.hot_topics = HotTopicsConfig(raw)
         self.publisher = PublisherConfig(raw)

@@ -77,20 +77,34 @@ class ContentAgent:
         article.hot_topic = topic
         logger.info(f"[Agent] 话题确定: {topic}")
 
-        # Step 2: RAG 检索
-        rag_context = self.rag_tool.retrieve_context(topic, top_k=settings.generation.rag_top_k)
-        logger.info(f"[Agent] RAG 检索完成，获取 {len(rag_context)} 字参考素材")
+        # Step 2: RAG 检索（增强检索：参考素材 + 避坑指南 + 参考经验）
+        try:
+            from quality.enhanced_retriever import EnhancedRetriever
+            enh_retriever = EnhancedRetriever()
+            enh_result = enh_retriever.retrieve_enhanced(topic, top_k=settings.generation.rag_top_k)
+            rag_context = enh_result.context
+            avoidance_guide = enh_result.avoidance_guide
+            experience_guide = enh_result.experience_guide
+            logger.info(
+                f"[Agent] 增强检索完成: RAG={enh_result.rag_match_count}, "
+                f"教训={enh_result.lesson_match_count}, 经验={enh_result.experience_match_count}"
+            )
+        except Exception as e:
+            logger.warning(f"[Agent] 增强检索失败，降级为普通检索: {e}")
+            rag_context = self.rag_tool.retrieve_context(topic, top_k=settings.generation.rag_top_k)
+            avoidance_guide = ""
+            experience_guide = ""
 
         # Step 3: 生成大纲
         logger.info("[Agent] 生成文章大纲...")
-        outline = self._generate_outline(topic, rag_context)
+        outline = self._generate_outline(topic, rag_context, avoidance_guide, experience_guide)
         if not outline:
             logger.warning("[Agent] 大纲生成失败，使用默认结构")
             outline = self._default_outline(topic)
 
         # Step 4: 逐段扩写生成正文
         logger.info("[Agent] 生成文章正文...")
-        content = self._generate_content(topic, outline, rag_context)
+        content = self._generate_content(topic, outline, rag_context, avoidance_guide, experience_guide)
 
         # Step 5: 全文润色
         logger.info("[Agent] 润色文章...")
@@ -121,11 +135,13 @@ class ContentAgent:
 
         return article
 
-    def _generate_outline(self, topic: str, rag_context: str) -> dict:
+    def _generate_outline(self, topic: str, rag_context: str, avoidance_guide: str = "", experience_guide: str = "") -> dict:
         """生成文章大纲"""
         prompt = OUTLINE_PROMPT.format(
             hot_topic=topic,
             rag_context=rag_context[:3000],
+            avoidance_guide=avoidance_guide,
+            experience_guide=experience_guide,
         )
         try:
             result = self._chat(user=prompt, temperature=0.7, max_tokens=2048)
@@ -151,7 +167,7 @@ class ContentAgent:
             "ending": "你觉得呢？评论区聊聊你的看法，觉得有用的话点个收藏，慢慢看。",
         }
 
-    def _generate_content(self, topic: str, outline: dict, rag_context: str) -> str:
+    def _generate_content(self, topic: str, outline: dict, rag_context: str, avoidance_guide: str = "", experience_guide: str = "") -> str:
         """根据大纲生成正文"""
         outline_points = json.dumps(outline.get("points", []), ensure_ascii=False, indent=2)
         hook = outline.get("hook", "")
@@ -162,6 +178,8 @@ class ContentAgent:
             outline_points=outline_points,
             rag_context=rag_context[:3000],
             target_words=settings.generation.target_word_count,
+            avoidance_guide=avoidance_guide,
+            experience_guide=experience_guide,
         )
 
         return self._chat(system=SYSTEM_PROMPT, user=prompt, temperature=0.7, max_tokens=settings.models.llm.max_tokens)

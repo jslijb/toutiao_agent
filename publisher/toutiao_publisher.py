@@ -311,7 +311,7 @@ class ToutiaoPublisher(PublisherBase):
                     logger.info("[Publisher] 页面加载完成，编辑器已渲染")
                 except PlaywrightTimeout:
                     # 编辑器超时未出现 → 可能是 SPA 加载慢或页面异常
-                    logger.warning("[ Publisher] 等待编辑器渲染超时(20s)，保存诊断信息...")
+                    logger.warning("[Publisher] 等待编辑器渲染超时(20s)，保存诊断信息...")
                     self._diagnose_element_not_found(
                         self.page, "编辑器(SPA加载)", _MICRO_EDITOR
                     )

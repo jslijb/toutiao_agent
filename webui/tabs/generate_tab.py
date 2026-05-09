@@ -11,6 +11,7 @@ from image_gen.cartoon_gen import WanxImageGenerator
 from image_gen.prompt_builder import CartoonPromptBuilder
 from image_gen.scene_extractor import SceneExtractor
 from models.generated_store import get_generated_store
+from services.image_regen_service import regen_service
 from utils.image_cache import image_cache
 
 
@@ -60,6 +61,9 @@ def create_generate_tab() -> gr.Blocks:
                     img3 = gr.Image(label="配图3", height=250)
                     img4 = gr.Image(label="配图4", height=250)
 
+                with gr.Row():
+                    regen_images_btn = gr.Button("重新生成失败配图", variant="primary", visible=False)
+
                 gen_status = gr.Textbox(label="生成状态", interactive=False)
 
         refresh_btn.click(
@@ -71,7 +75,13 @@ def create_generate_tab() -> gr.Blocks:
             fn=generate_article,
             inputs=[hot_topics_radio, custom_topic],
             outputs=[title_output, word_count, content_output,
-                     img1, img2, img3, img4, gen_status],
+                     img1, img2, img3, img4, gen_status, regen_images_btn],
+        )
+
+        regen_images_btn.click(
+            fn=on_regen_from_generate_tab,
+            outputs=[title_output, word_count, content_output,
+                     img1, img2, img3, img4, gen_status, regen_images_btn],
         )
 
     return tab
@@ -103,7 +113,6 @@ def generate_article(hot_topic: str, custom_topic: str):
 
     topic = custom_topic.strip() if custom_topic.strip() else ""
     if not topic and hot_topic:
-        # 兼容英文括号和中文括号: "标题 (热度:xxx)" 或 "标题（热度:xxx）"
         for sep in [" (", "（"]:
             if sep in hot_topic:
                 topic = hot_topic.split(sep)[0].strip()
@@ -111,18 +120,16 @@ def generate_article(hot_topic: str, custom_topic: str):
         else:
             topic = hot_topic.strip()
 
-    # 过滤无效默认值
     if topic in ("（点击获取热点）", "无可用热点", ""):
         topic = ""
 
     logger.info(f"[生成] hot_topic={hot_topic!r}, custom_topic={custom_topic!r}, topic={topic!r}")
 
     if not topic:
-        yield "请选择热点或输入自定义主题", "", "", None, None, None, None, ""
+        yield "请选择热点或输入自定义主题", "", "", None, None, None, None, "", gr.update(visible=False)
         return
 
-    # Phase 1: 生成文章
-    yield "正在生成文章...", "", "", None, None, None, None, "Step 1/2: 生成文章中..."
+    yield "正在生成文章...", "", "", None, None, None, None, "Step 1/2: 生成文章中...", gr.update(visible=False)
 
     try:
         agent = ContentAgent()
@@ -133,10 +140,9 @@ def generate_article(hot_topic: str, custom_topic: str):
         _latest_article = article
     except Exception as e:
         logger.error(f"文章生成失败: {e}")
-        yield f"生成失败: {e}", "", "", None, None, None, None, f"文章生成失败: {e}"
+        yield f"生成失败: {e}", "", "", None, None, None, None, f"文章生成失败: {e}", gr.update(visible=False)
         return
 
-    # 保存到持久化存储
     try:
         store = get_generated_store()
         store.add(article)
@@ -144,18 +150,16 @@ def generate_article(hot_topic: str, custom_topic: str):
     except Exception as e:
         logger.warning(f"[生成] 文章缓存保存失败: {e}")
 
-    # 先输出文章内容
     yield (
         article.title,
         f"字数: {article.word_count} | 热点: {article.hot_topic}",
         article.content,
         None, None, None, None,
         "Step 2/2: 生成配图中...",
+        gr.update(visible=False),
     )
 
-    # Phase 2: 生成配图（优先使用缓存）
     try:
-        # 检查缓存
         cached = image_cache.get(article.id)
         if cached and len(cached.get("image_paths", [])) >= 4:
             logger.info(f"[生成] 使用已缓存的配图: {article.id}")
@@ -167,10 +171,10 @@ def generate_article(hot_topic: str, custom_topic: str):
                 article.content,
                 *article.image_paths[:4],
                 "配图已从缓存加载",
+                gr.update(visible=False),
             )
             return
 
-        # 需要生成配图
         scenes = article.scenes
         if not scenes or len(scenes) < 4:
             extractor = SceneExtractor()
@@ -181,7 +185,6 @@ def generate_article(hot_topic: str, custom_topic: str):
 
         article.scenes = scenes
 
-        # 按文章 ID 创建输出目录
         from pathlib import Path
         from config.settings import PROJECT_ROOT
         article_img_dir = PROJECT_ROOT / "output" / "images" / article.id
@@ -203,7 +206,6 @@ def generate_article(hot_topic: str, custom_topic: str):
                 all_paths.append(None)
                 logger.warning(f"[生成] 配图 {i+1} 失败")
 
-            # 逐张更新 UI
             current_paths = all_paths + [None] * (4 - len(all_paths))
             yield (
                 article.title,
@@ -211,28 +213,33 @@ def generate_article(hot_topic: str, custom_topic: str):
                 article.content,
                 *current_paths[:4],
                 f"配图生成中 {i+1}/4...",
+                gr.update(visible=False),
             )
 
-        # 补齐到 4 张
         while len(all_paths) < 4:
             all_paths.append(None)
 
         article.image_paths = [p for p in all_paths if p]
 
-        # 保存缓存
         image_cache.save(article.id, article.scenes, article.image_paths)
 
-        n_success = sum(1 for p in all_paths if p)
-        status_msg = f"生成完成: 文章 + {n_success}/4 张配图"
+        failure_status = regen_service.detect_failure_status(all_paths[:4])
+        n_success = failure_status.success_count
+        regen_visible = failure_status.failure_type != "none"
 
-        # 自动发布
+        if failure_status.failure_type == "none":
+            status_msg = f"生成完成: 文章 + 4/4 张配图"
+        elif failure_status.failure_type == "full":
+            status_msg = "配图生成失败（文章已生成）"
+        else:
+            status_msg = f"生成完成: 文章 + {n_success}/4 张配图（部分配图生成失败，可重新生成）"
+
         if settings.publisher.auto_publish:
             try:
                 from publisher.toutiao_publisher import get_toutiao_publisher
                 publisher = get_toutiao_publisher()
                 img_paths = [p for p in all_paths[:4] if p]
 
-                # 从 hot_topic 生成动态话题
                 dynamic_topics = []
                 if article.hot_topic:
                     for t in article.hot_topic.replace("，", ",").split(","):
@@ -268,6 +275,7 @@ def generate_article(hot_topic: str, custom_topic: str):
             article.content,
             *all_paths[:4],
             status_msg,
+            gr.update(visible=regen_visible),
         )
 
     except Exception as e:
@@ -278,6 +286,7 @@ def generate_article(hot_topic: str, custom_topic: str):
             article.content,
             None, None, None, None,
             f"配图生成失败: {e}（文章已生成）",
+            gr.update(visible=True),
         )
 
 
@@ -285,7 +294,6 @@ def get_latest_article():
     """供其他 Tab 获取最新生成的文章（优先从内存缓存，其次从持久化存储）"""
     if _latest_article:
         return _latest_article
-    # 从持久化存储加载最新一篇
     try:
         store = get_generated_store()
         articles = store.get_all()
@@ -294,3 +302,21 @@ def get_latest_article():
     except Exception:
         pass
     return None
+
+
+def on_regen_from_generate_tab():
+    """文章生成Tab中的配图重新生成回调（仅重新生成失败位置）"""
+    global _latest_article
+    article = get_latest_article()
+    if not article:
+        yield "", "", "", None, None, None, None, "请先在「文章生成」Tab 中生成文章", gr.update(visible=False)
+        return
+
+    title = article.title
+    word_count_info = f"字数: {article.word_count} | 热点: {article.hot_topic}"
+    content = article.content
+
+    for paths, status_msg in regen_service.regenerate_article_images(article, scope="failed_only"):
+        failure_status = regen_service.detect_failure_status(paths)
+        regen_visible = failure_status.failure_type != "none"
+        yield title, word_count_info, content, *paths[:4], status_msg, gr.update(visible=regen_visible)

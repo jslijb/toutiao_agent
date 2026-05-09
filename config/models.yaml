@@ -5,7 +5,7 @@
 models:
   # 大语言模型
   llm:
-    name: "qwen3-max-2026-01-23"
+    name: "qwen3.5-flash"
     api_base: "https://dashscope.aliyuncs.com/compatible-mode/v1"
     max_tokens: 8192
     temperature: 0.7
@@ -13,15 +13,17 @@ models:
 
   # 文本嵌入模型（用于 RAG）
   embedding:
-    name: "text-embedding-v2"
-    dimension: 1536         # text-embedding-v1 固定 1536 维
-    batch_size: 25          # 每批最大条数（v1 支持最大25）
-    batch_interval: 0       # 批次间隔秒数
+    name: "BAAI/bge-large-zh-v1.5"
+    dimension: 1024         # bge-large-zh-v1.5 原生 1024 维
+    batch_size: 25          # 每批最大条数
+    batch_interval: 0       # 本地模型无限流，间隔为 0
+    model_path: ""          # 空=使用默认 data/models/ 路径
+    device: ""              # 空=自动检测（优先 GPU）
 
   # 图片生成模型
   image_gen:
-    name: "wanx2.1-t2i-turbo"
-    style: "3D卡通"         # 可选: 3D卡通, 扁平插画, 二次元, 水彩, 油画
+    name: "wan2.7-t2v"
+    style: "二次元"         # 可选: 3D卡通, 扁平插画, 二次元, 水彩, 油画
     size: "1024*1024"       # 可选: 1024*1024, 720*1280, 768*1152, 1280*720
     n: 4                    # 每次生成图片数
     async_mode: true        # true=创建任务+轮询, false=同步返回
@@ -29,7 +31,38 @@ models:
     max_poll_times: 60      # 最大轮询次数（5分钟超时）
 
 # ============================================
-# 爬虫配置
+# 数据源配置（替代旧爬虫）
+# ============================================
+datasource:
+  corpus_news_path: ""
+  corpus_qa_path: ""
+  corpus_min_content_length: 200
+  corpus_batch_size: 1000
+  tianapi_base_url: "https://apis.tianapi.com"
+  tianapi_balance_alert_threshold: 100
+  tianapi_total_beans: 1000
+  bing_monthly_quota: 1000
+  bing_endpoint: "https://api.bing.microsoft.com/v7.0/news/search"
+  rss_fetch_fulltext: false
+  rss_sources:
+    - name: "36kr"
+      url: "https://36kr.com/feed"
+      enabled: true
+    - name: "huxiu"
+      url: "https://www.huxiu.com/rss/0.xml"
+      enabled: false
+    - name: "zhihu_daily"
+      url: "https://daily.zhihu.com/rss"
+      enabled: true
+    - name: "sspai"
+      url: "https://sspai.com/feed"
+      enabled: true
+    - name: "ithome"
+      url: "https://www.ithome.com/rss/"
+      enabled: true
+
+# ============================================
+# 爬虫配置（保留关键词等通用配置）
 # ============================================
 crawler:
   # 搜索请求间隔（秒）— 3~6秒平衡速度与反爬
@@ -119,7 +152,7 @@ hot_topics:
     - "toutiao"     # 今日头条热榜
     - "weibo"       # 微博热搜
     - "baidu"       # 百度热搜
-  max_topics: 15     # 最大获取热点数
+  max_topics: 50     # 最大获取热点数
   use_llm_filter: true  # 是否使用 LLM 智能筛选（从关键词过滤后的结果中精选）
   # 热点过滤关键词（与 crawler.keywords 共享，也用于热点筛选）
   # 如果不设置，默认使用 crawler.keywords
@@ -154,7 +187,7 @@ dedup:
   content_hamming_threshold: 3
 
   # 参与内容去重的最短正文字数（短文不参与 SimHash 计算）
-  min_content_length: 50
+  min_content_length: 200
 
   # 是否在爬取时启用语义去重（除了 URL 精确匹配外）
   enable_semantic_dedup: true

@@ -64,6 +64,15 @@ class GeneratedArticle:
     published_url: str = ""           # 发布后的 URL
     metrics: dict = field(default_factory=dict)  # 发布后的数据指标 {views, likes, comments, ...}
     analysis: str = ""                # 文章分析结果
+    quality_category: str = ""        # positive / negative / ""（未标注）
+    limit_flow: bool = False          # 是否被平台限流
+    label_reason: str = ""            # 标注原因备注
+    cause_categories: list[str] = field(default_factory=list)  # 原因分类标签
+    labeled_at: str = ""              # 标注时间
+    analysis_status: str = ""         # pending / done / failed
+    analysis_report: str = ""         # LLM分析报告
+    lesson_ids: list[str] = field(default_factory=list)   # 关联的教训ID
+    experience_ids: list[str] = field(default_factory=list)  # 关联的经验ID
 
     def to_dict(self) -> dict:
         return asdict(self)

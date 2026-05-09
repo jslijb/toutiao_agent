@@ -1,8 +1,7 @@
-"""Pipeline 编排器 - 爬虫/RAG批处理流程串联"""
+"""Pipeline 编排器 - 数据源获取/RAG批处理流程串联"""
 from __future__ import annotations
 
 import json
-from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
@@ -10,53 +9,34 @@ from typing import Optional
 from loguru import logger
 
 from config.settings import PROJECT_ROOT, settings
+from datasources.manager import DataSourceManager
+from datasources.quality_scorer import score_article
 from models.article import ArticleData
 from models.article_store import get_article_store
 from models.pipeline import PipelineContext, StageResult, StageStatus
 from rag.cleaner import TextCleaner
 from rag.chunker import TextChunker
-from rag.embedder import DashScopeEmbedder
+from rag.embedder import create_embedder
 from rag.vectorstore import FAISSVectorStore
 from rag.retriever import Retriever
 
 
 class CrawlPipeline:
-    """爬虫 Pipeline: 多平台并行爬取 → 去重 → 详情页抓取 → 存储"""
+    """数据获取 Pipeline: 组合数据源获取 → 质量评分 → 存储"""
 
     def __init__(self):
-        from crawlers.toutiao_crawler import ToutiaoCrawler
-        from crawlers.zhihu_crawler import ZhihuCrawler
-        from crawlers.wechat_crawler import WechatCrawler
-        from crawlers.baijiahao_crawler import BaijiahaoCrawler
-        from crawlers.kr36_crawler import Kr36Crawler
-
-        self.crawlers = {
-            "toutiao": ToutiaoCrawler(),
-            "zhihu": ZhihuCrawler(),
-            "wechat": WechatCrawler(),
-            "baijiahao": BaijiahaoCrawler(),
-            "kr36": Kr36Crawler(),
-        }
+        self.datasource_manager = DataSourceManager()
         self.raw_dir = PROJECT_ROOT / "data" / "raw"
 
     def run(
         self,
-        platforms: list[str] | None = None,
+        sources: list[str] | None = None,
         keywords: list[str] | None = None,
-        max_per_platform: int | None = None,
         parallel: bool = True,
     ) -> PipelineContext:
-        """执行爬虫 Pipeline（平台间并行爬取）
-
-        Args:
-            platforms: 要爬取的平台列表
-            keywords: 搜索关键词
-            max_per_platform: 每平台最大文章数
-            parallel: 是否平台间并行（默认True）
-        """
+        """执行数据获取 Pipeline"""
         context = PipelineContext()
-        platforms = platforms or ["toutiao", "zhihu", "kr36"]
-        max_per_platform = max_per_platform or settings.crawler.max_articles_per_platform
+        keywords = keywords or settings.crawler.keywords
 
         start_time = datetime.now()
         result = StageResult(
@@ -66,20 +46,23 @@ class CrawlPipeline:
         )
 
         try:
-            if parallel and len(platforms) > 1:
-                all_articles = self._run_parallel(platforms, keywords, max_per_platform)
-            else:
-                all_articles = self._run_sequential(platforms, keywords, max_per_platform)
+            all_articles = self.datasource_manager.fetch_realtime(
+                sources=sources, keywords=keywords, parallel=parallel,
+            )
 
-            # 统计有正文的文章
-            with_content = sum(1 for a in all_articles if len(a.content) >= 200)
+            for article in all_articles:
+                article.quality_score = score_article(article)
+
             store = get_article_store()
-            store_stats = store.count_by_platform()
+            for article in all_articles:
+                store.add(article)
+
+            with_content = sum(1 for a in all_articles if len(a.content) >= 200)
 
             context.articles = all_articles
             result.status = StageStatus.SUCCESS
             result.message = (
-                f"共爬取 {len(all_articles)} 篇文章"
+                f"共获取 {len(all_articles)} 篇文章"
                 f"（有正文: {with_content}, "
                 f"知识库总计: {store.count()} 篇）"
             )
@@ -87,81 +70,14 @@ class CrawlPipeline:
         except Exception as e:
             result.status = StageStatus.FAILED
             result.message = str(e)
-            logger.error(f"爬虫 Pipeline 失败: {e}")
+            logger.error(f"数据获取 Pipeline 失败: {e}")
 
         result.finished_at = datetime.now().isoformat()
         context.add_stage_result(result)
         elapsed = (datetime.now() - start_time).total_seconds()
-        logger.info(f"[Pipeline] 爬虫完成: {result.message} (耗时 {elapsed:.0f}秒)")
-
-        # 清理浏览器池，释放资源
-        try:
-            from crawlers.base import cleanup_browser_pool
-            cleanup_browser_pool()
-        except Exception:
-            pass
+        logger.info(f"[Pipeline] 数据获取完成: {result.message} (耗时 {elapsed:.0f}秒)")
 
         return context
-
-    def _run_sequential(self, platforms, keywords, max_per_platform) -> list[ArticleData]:
-        """串行爬取（降级模式）"""
-        all_articles = []
-        for platform in platforms:
-            crawler = self.crawlers.get(platform)
-            if not crawler:
-                logger.warning(f"未知平台: {platform}")
-                continue
-            logger.info(f"{'='*50}")
-            logger.info(f"开始爬取: {platform}")
-            logger.info(f"{'='*50}")
-            articles = crawler.crawl(keywords=keywords, max_count=max_per_platform)
-            all_articles.extend(articles)
-            self._save_crawled_data(platform, articles)
-        return all_articles
-
-    def _run_parallel(self, platforms, keywords, max_per_platform) -> list[ArticleData]:
-        """平台间并行爬取"""
-        all_articles = []
-        futures = {}
-
-        # 限制最多3个并行线程（避免触发反爬）
-        max_workers = min(len(platforms), 3)
-
-        with ThreadPoolExecutor(max_workers=max_workers, thread_name_prefix="crawl") as pool:
-            for platform in platforms:
-                crawler = self.crawlers.get(platform)
-                if not crawler:
-                    logger.warning(f"未知平台: {platform}")
-                    continue
-                logger.info(f"{'='*50}")
-                logger.info(f"提交爬取任务: {platform}")
-                logger.info(f"{'='*50}")
-                future = pool.submit(crawler.crawl, keywords=keywords, max_count=max_per_platform)
-                futures[future] = platform
-
-            for future in as_completed(futures):
-                platform = futures[future]
-                try:
-                    articles = future.result()
-                    all_articles.extend(articles)
-                    self._save_crawled_data(platform, articles)
-                    logger.info(f"[Pipeline] {platform} 完成: {len(articles)} 篇")
-                except Exception as e:
-                    logger.error(f"[Pipeline] {platform} 失败: {e}")
-
-        return all_articles
-
-    def _save_crawled_data(self, platform: str, articles: list[ArticleData]):
-        """保存爬取数据到 JSON（兼容旧逻辑）"""
-        today = datetime.now().strftime("%Y%m%d")
-        filename = f"{platform}_{today}.json"
-        filepath = self.raw_dir / platform / filename
-        filepath.parent.mkdir(parents=True, exist_ok=True)
-
-        data = [a.to_dict() for a in articles]
-        with open(filepath, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
-        logger.info(f"[Pipeline] 原始数据已保存: {filepath}")
 
 
 class RAGPipeline:
@@ -170,7 +86,7 @@ class RAGPipeline:
     def __init__(self):
         self.cleaner = TextCleaner()
         self.chunker = TextChunker(chunk_size=500, chunk_overlap=100)
-        self.embedder = DashScopeEmbedder()
+        self.embedder = create_embedder()
         self.vectorstore = FAISSVectorStore()
 
     def run(self, articles: list[ArticleData] | None = None, force_full: bool = False) -> PipelineContext:

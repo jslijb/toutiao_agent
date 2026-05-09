@@ -6,7 +6,8 @@ from loguru import logger
 
 from config.settings import settings
 from webui.tabs.config_tab import create_config_tab
-from webui.tabs.crawler_tab import create_crawler_tab
+from webui.tabs.datasource_tab import create_datasource_tab
+from webui.tabs.quality_tab import create_quality_tab
 from webui.tabs.generate_tab import create_generate_tab
 from webui.tabs.image_tab import create_image_tab
 from webui.tabs.publish_tab import create_publish_tab
@@ -35,8 +36,10 @@ def create_app() -> gr.Blocks:
         with gr.Tabs():
             with gr.Tab("配置管理"):
                 create_config_tab()
-            with gr.Tab("爬虫控制"):
-                create_crawler_tab()
+            with gr.Tab("数据源管理"):
+                create_datasource_tab()
+            with gr.Tab("质量标注"):
+                create_quality_tab()
             with gr.Tab("文章生成"):
                 create_generate_tab()
             with gr.Tab("卡通配图"):

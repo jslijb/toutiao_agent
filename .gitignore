@@ -1,3 +1,5 @@
+# 忽略 Python 字节码缓存目录
+__pycache__/
 # 忽略 data 目录及其所有内容
 data/*
 !data/.gitkeep
@@ -13,3 +15,5 @@ publisher/data/*
 # 忽略 toutiao 目录及其所有内容
 toutiao/*
 !toutiao/.gitkeep
+.arts/*
+.codeartsdoer/*

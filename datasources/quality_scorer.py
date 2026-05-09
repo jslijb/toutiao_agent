@@ -1,11 +1,12 @@
 """文章质量评分器 — 统一加权：阅读量×0.4 + 点赞量×0.35 + 评论量×0.25
 
-各平台可用数据不同：
-- 头条: 点赞、评论（阅读量、收藏不公开）
-- 知乎: 点赞(赞同)、评论、收藏
-- 微信: 阅读、点赞(在看)、转发
-- 36氪: 点赞、评论
-- 百家号: 无互动数据
+各数据源可用数据不同：
+- corpus_news: 无互动数据
+- corpus_qa: 点赞数(star)
+- tianapi_weibo_hot: 热度(hotnum)
+- tianapi_daily_brief/news: 部分互动数据
+- bing_news: 无互动数据
+- rss_*: 无互动数据
 
 缺失指标时，将其权重按比例重新分配给已有指标。
 """
@@ -15,18 +16,17 @@ from models.article import ArticleData, ArticleMetrics
 from loguru import logger
 
 
-# 统一权重
 _WEIGHT_VIEWS = 0.40
 _WEIGHT_LIKES = 0.35
 _WEIGHT_COMMENTS = 0.25
 
-# 各平台的归一化基准值（达到此值即得满分1.0）
 _NORM = {
-    "toutiao":  {"views": 50000, "likes": 2000, "comments": 500},
-    "zhihu":    {"views": 100000, "likes": 5000, "comments": 500},
-    "wechat":   {"views": 100000, "likes": 5000, "comments": 1000},
-    "kr36":     {"views": 50000, "likes": 200, "comments": 100},
-    "baijiahao": {"views": 50000, "likes": 1000, "comments": 300},
+    "corpus_qa": {"views": 10000, "likes": 500, "comments": 100},
+    "tianapi_weibo_hot": {"views": 10000000, "likes": 50000, "comments": 5000},
+    "tianapi_news": {"views": 50000, "likes": 2000, "comments": 500},
+    "tianapi_daily_brief": {"views": 50000, "likes": 2000, "comments": 500},
+    "bing_news": {"views": 50000, "likes": 2000, "comments": 500},
+    "default": {"views": 50000, "likes": 2000, "comments": 500},
 }
 
 
@@ -36,10 +36,9 @@ def score_article(article: ArticleData) -> float:
     缺失指标的权重按比例重新分配给已有指标。
     """
     m = article.metrics
-    norm = _NORM.get(article.source, _NORM["toutiao"])
+    norm = _NORM.get(article.source, _NORM["default"])
 
-    # 收集已有指标及其权重
-    parts: list[tuple[float, float]] = []  # (weighted_score, weight)
+    parts: list[tuple[float, float]] = []
     if m.views and m.views > 0:
         s = min(m.views / norm["views"], 1.0)
         parts.append((s * _WEIGHT_VIEWS, _WEIGHT_VIEWS))
@@ -51,19 +50,15 @@ def score_article(article: ArticleData) -> float:
         parts.append((s * _WEIGHT_COMMENTS, _WEIGHT_COMMENTS))
 
     if not parts:
-        # 无任何互动数据，给予基础分（根据平台微调）
-        if article.source == "baijiahao":
-            return _score_baijiahao_fallback(article)
-        return 0.3
+        return _fallback_score(article)
 
-    # 将缺失指标的权重按比例重新分配
     total_weight = sum(w for _, w in parts)
     score = sum(s for s, _ in parts) / total_weight
     return min(score, 1.0)
 
 
-def _score_baijiahao_fallback(article: ArticleData) -> float:
-    """百家号降级评分（互动数据不可获取）"""
+def _fallback_score(article: ArticleData) -> float:
+    """无互动数据时的降级评分"""
     score = 0.3
     if len(article.title) > 10:
         score += 0.2
@@ -75,15 +70,15 @@ def _score_baijiahao_fallback(article: ArticleData) -> float:
 
 
 def normalize_scores(articles: list[ArticleData], source: str) -> list[ArticleData]:
-    """对同一平台的文章进行归一化评分（Min-Max 归一化）"""
-    platform_articles = [a for a in articles if a.source == source]
-    if not platform_articles:
+    """对同一数据源的文章进行归一化评分（Min-Max 归一化）"""
+    source_articles = [a for a in articles if a.source == source]
+    if not source_articles:
         return articles
 
-    scores = [a.quality_score for a in platform_articles]
+    scores = [a.quality_score for a in source_articles]
     min_s, max_s = min(scores), max(scores)
     range_s = max_s - min_s if max_s > min_s else 1.0
 
-    for a in platform_articles:
+    for a in source_articles:
         a.quality_score = (a.quality_score - min_s) / range_s
     return articles
