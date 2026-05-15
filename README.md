@@ -7,11 +7,9 @@
 | 类别 | 技术 | 用途 |
 |------|------|------|
 | **Web UI** | Gradio 5.x | 5个Tab页面交互界面 |
-<<<<<<< HEAD
 | **大语言模型** | Qwen3-Max (DashScope) | 文章生成、标题优化、热点筛选、场景提取 |
 =======
 | **大语言模型** | Qwen3.5plus | 文章生成、标题优化、热点筛选、场景提取 |
->>>>>>> 836c8100f9191acb9e6ba52166910f98a7421fdb
 | **Embedding** | text-embedding-v2 (DashScope) | RAG 向量化 |
 | **向量检索** | FAISS (IndexFlatIP + L2归一化=余弦相似度) | 语义检索 |
 | **浏览器自动化** | Playwright (Chromium) + playwright-stealth | 爬虫详情页、登录、发布操作 |
